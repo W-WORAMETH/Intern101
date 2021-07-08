@@ -26,7 +26,6 @@ def callbackSensor4(data):
 def listener():
 
     rospy.init_node('listener', anonymous=True)
-
     rospy.Subscriber('sensor1', int, callbackSensor1)
     rospy.Subscriber('sensor2', int, callbackSensor2)
     rospy.Subscriber('sensor3', int, callbackSensor3)
