@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import Int32MultiArray
 
 import time
 import sys
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 rospy.init_node('rpi', anonymous=True)
 
 
 def sendData(Topic,Massage):
-    pub = rospy.Publisher(Topic,int,queue_size=10)
+    pub = rospy.Publisher(Topic,Int32MultiArray,queue_size=10)
     rospy.loginfo(Massage)
     pub.publish(Massage)
 
@@ -29,20 +29,17 @@ def cleanAndExit():
     print("Bye!")
     sys.exit()
 
-#hx1 = HX711(27,17)
-#hx2 = HX711(5,22)
-#hx3 = HX711(13,6)
-#hx4 = HX711(26,19)
-hx1 = HX711(6,5)
-hx2 = HX711(19,13)
-hx3 = HX711(21,26)
-hx4 = HX711(16,20)
+
+#!hx1 = HX711(6,5)
+#!hx2 = HX711(19,13)
+#!hx3 = HX711(21,26)
+#!hx4 = HX711(16,20)
 
 
-hx1.set_reading_format("MSB", "MSB")
-hx2.set_reading_format("MSB", "MSB")
-hx3.set_reading_format("MSB", "MSB")
-hx4.set_reading_format("MSB", "MSB")
+#!hx1.set_reading_format("MSB", "MSB")
+#!hx2.set_reading_format("MSB", "MSB")
+#!hx3.set_reading_format("MSB", "MSB")
+#!hx4.set_reading_format("MSB", "MSB")
 
 
 # HOW TO CALCULATE THE REFFERENCE UNIT
@@ -51,16 +48,17 @@ hx4.set_reading_format("MSB", "MSB")
 # and I got numbers around 184000 when I added 2kg. So, according to the rule of thirds:
 # If 2000 grams is 184000 then 1000 grams is 184000 / 2000 = 92.
 #hx.set_reference_unit(113)
-hx1.set_reference_unit(1)
-hx2.set_reference_unit(1)
-hx3.set_reference_unit(1)
-hx4.set_reference_unit(1)
+
+#!hx1.set_reference_unit(1)
+#!hx2.set_reference_unit(1)
+#!hx3.set_reference_unit(1)
+#!hx4.set_reference_unit(1)
 
 
-hx1.reset()
-hx2.reset()
-hx3.reset()
-hx4.reset()
+#!hx1.reset()
+#!hx2.reset()
+#!hx3.reset()
+#!hx4.reset()
 
 
 # to use both channels, you'll need to tare them both
@@ -79,10 +77,15 @@ while True:
         
         # Prints the weight. Comment if you're debbuging the MSB and LSB issue.
       
-        val1 = hx1.get_weight()
-        val2 = hx2.get_weight()
-        val3 = hx3.get_weight()
-        val4 = hx4.get_weight()
+        #!val1 = hx1.get_weight()
+        #!val2 = hx2.get_weight()
+        #!val3 = hx3.get_weight()
+        #!val4 = hx4.get_weight()
+
+        val1 = 200000
+        val2 = 300000
+        val3 = 400000
+        val4 = 500000
 
         print("CH1 = %s" %(val1))
         print("CH2 = %s" %(val2))
@@ -90,11 +93,10 @@ while True:
         print("CH4 = %s" %(val4))
         print("===================")
 
+        Data = (val1,val2,val3,val4)
         if(not rospy.is_shutdown()): 
-            sendData('sensor1',val1)
-            sendData('sensor2',val2)
-            sendData('sensor3',val3)
-            sendData('sensor4',val4)
+            sendData('sensor',Data)
+           
 
 
 
@@ -105,14 +107,14 @@ while True:
         #val_B = hx.get_weight_B(5)
         #print "A: %s  B: %s" % ( val_A, val_B )
 
-        hx1.power_down()
-        hx1.power_up()
-        hx2.power_down()
-        hx2.power_up()
-        hx3.power_down()
-        hx3.power_up()
-        hx4.power_down()
-        hx4.power_up()
+        #!hx1.power_down()
+        #!hx1.power_up()
+        #!hx2.power_down()
+        #!hx2.power_up()
+        #!hx3.power_down()
+        #!hx3.power_up()
+        #!hx4.power_down()
+        #!hx4.power_up()
         time.sleep(0.1)
 
         
