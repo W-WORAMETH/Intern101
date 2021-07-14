@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from array import array
 import rospy
 from std_msgs.msg import Int32MultiArray
