@@ -23,7 +23,7 @@ GPIO.setup(Solinoid6, GPIO.OUT)
 
 
 SolinoidCommand = Int8MultiArray()
-SolinoidCommand = [0,0,0,0,0,0]
+SolinoidCommand = [0,1,0,0,0,0]
 
 GPIO.out(Solinoid1,bool(SolinoidCommand.data[0]))
 GPIO.out(Solinoid1,bool(SolinoidCommand.data[1]))
