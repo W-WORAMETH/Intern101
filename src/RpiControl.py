@@ -26,8 +26,8 @@ SolinoidCommand = Int8MultiArray()
 SolinoidCommand = [0,1,0,0,0,0]
 
 GPIO.output(Solinoid1,GPIO.LOW)
-GPIO.output(Solinoid1,GPIO.LOW)
-GPIO.output(Solinoid1,GPIO.HIGH)
-GPIO.output(Solinoid1,GPIO.HIGH)
-GPIO.output(Solinoid1,GPIO.LOW)
-GPIO.output(Solinoid1,GPIO.HIGH)
+GPIO.output(Solinoid2,GPIO.LOW)
+GPIO.output(Solinoid3,GPIO.HIGH)
+GPIO.output(Solinoid4,GPIO.HIGH)
+GPIO.output(Solinoid5,GPIO.LOW)
+GPIO.output(Solinoid6,GPIO.HIGH)
