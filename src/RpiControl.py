@@ -3,7 +3,7 @@ import time
 import sys
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int8MultiArray
-from std_msgs.msg import bool
+from std_msgs.msg import Bool
 
 Solinoid1 = 4
 Solinoid2 = 17
@@ -25,9 +25,9 @@ GPIO.setup(Solinoid6, GPIO.OUT)
 SolinoidCommand = Int8MultiArray()
 SolinoidCommand = [0,1,0,0,0,0]
 
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[0]))
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[1]))
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[2]))
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[3]))
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[4]))
-GPIO.out(Solinoid1,bool(SolinoidCommand.data[5]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[0]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[1]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[2]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[3]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[4]))
+GPIO.out(Solinoid1,Bool(SolinoidCommand.data[5]))
