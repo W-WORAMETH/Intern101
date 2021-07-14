@@ -3,6 +3,9 @@ from array import array
 import rospy
 from std_msgs.msg import Int32MultiArray
 import sys
+import RPi.GPIO as GPIO
+import time
+from hx711 import HX711
 
 rospy.init_node('rpi', anonymous=True)
 rate = rospy.Rate(1) # 1hz
@@ -13,11 +16,11 @@ Data = Int32MultiArray()
 Data.data = []
 
 
-EMULATE_HX711=False
-if not EMULATE_HX711:
-    from hx711 import HX711
-else:
-    from emulated_hx711 import HX711
+#EMULATE_HX711=False
+#if not EMULATE_HX711:
+#    from hx711 import HX711
+#else:
+#    from emulated_hx711 import HX711
 
 def sendData(Topic,Massage):
     pub = rospy.Publisher(Topic,Int32MultiArray,queue_size=10)
@@ -28,8 +31,8 @@ def sendData(Topic,Massage):
 def cleanAndExit():
     print("Cleaning...")
 
-    if not EMULATE_HX711:
-       GPIO.cleanup()
+#    if not EMULATE_HX711:
+    GPIO.cleanup()
         
     print("Bye!")
     sys.exit()
