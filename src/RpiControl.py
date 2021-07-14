@@ -14,20 +14,20 @@ Solinoid6 = 23
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(Solinoid1, GPIO.OUT)
-GPIO.setup(Solinoid2, GPIO.OUT)
-GPIO.setup(Solinoid3, GPIO.OUT)
-GPIO.setup(Solinoid4, GPIO.OUT)
-GPIO.setup(Solinoid5, GPIO.OUT)
-GPIO.setup(Solinoid6, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
 
 
 SolinoidCommand = Int8MultiArray()
 SolinoidCommand = [0,1,0,0,0,0]
 
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[0]))
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[1]))
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[2]))
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[3]))
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[4]))
-GPIO.out(Solinoid1,Bool(SolinoidCommand.data[5]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[0]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[1]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[2]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[3]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[4]))
+GPIO.output(Solinoid1,Bool(SolinoidCommand.data[5]))
