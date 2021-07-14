@@ -2,7 +2,7 @@
 import rospy
 from std_msgs.msg import Int32MultiArray
 import sys
-from emulated_hx711 import HX711
+from hx711 import HX711
 
 rospy.init_node('rpi', anonymous=True)
 rate = rospy.Rate(1) # 1hz
