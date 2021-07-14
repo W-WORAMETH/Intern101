@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-from array import array
 import rospy
 from std_msgs.msg import Int32MultiArray
 import sys
-import RPi.GPIO as GPIO
-import time
 from hx711 import HX711
 
 rospy.init_node('rpi', anonymous=True)
