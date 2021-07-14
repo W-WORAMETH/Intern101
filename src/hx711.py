@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-import RPi.GPIO as GPIO
-import time
+#import RPi.GPIO as GPIO
+#import time
 import threading
-
-
 
 class HX711:
 
