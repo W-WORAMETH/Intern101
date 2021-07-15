@@ -67,11 +67,12 @@ hx4.reset()
 #hx.tare_B()
 
 def ReadSensor():
+    print("F")
     val1 = hx1.get_weight()
     val2 = hx2.get_weight()
     val3 = hx3.get_weight()
     val4 = hx4.get_weight()
-
+    print("I")
     rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(val1))
     rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(val2))
     rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(val3))
