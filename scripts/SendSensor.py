@@ -112,7 +112,6 @@ if __name__ == '__main__':
             print("E")
             ReadSensor()
             print("Z")
-            rospy.spin()
     except rospy.ROSInterruptException:
             print("Exxx")
             cleanAndExit()
