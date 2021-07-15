@@ -78,8 +78,8 @@ def ReadSensor():
     print("I")
     rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(val1))
     rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(val2))
-    rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(val3))
-    rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(val4))
+    # rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(val3))
+    # rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(val4))
 
    
 
