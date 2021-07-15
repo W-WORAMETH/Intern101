@@ -40,6 +40,7 @@ hx3 = HX711(21,26)
 hx4 = HX711(16,20)
 
 print("done initial")
+rospy.loginfo("TEST")
 
 hx1.set_reading_format("MSB", "MSB")
 hx2.set_reading_format("MSB", "MSB")
