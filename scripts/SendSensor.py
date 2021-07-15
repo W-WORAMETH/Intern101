@@ -14,7 +14,7 @@ Massage.data = []
 Data = Int32MultiArray()
 Data.data = []
 
-
+print("1")
 #EMULATE_HX711=False
 #if not EMULATE_HX711:
 #    from hx711 import HX711
@@ -35,7 +35,8 @@ def cleanAndExit():
         
     print("Bye!")
     sys.exit()
-
+rospy.loginfo("TEST1")
+print("2")
 hx1 = HX711(6,5)
 hx2 = HX711(19,13)
 hx3 = HX711(21,26)
@@ -99,9 +100,14 @@ def ReadSensor():
 
 if __name__ == '__main__':
     try:
+        rospy.loginfo("TEST3")
+        print("D")
         while not rospy.is_shutdown():
+            rospy.loginfo("TEST4")
+            print("E")
             ReadSensor()
             rospy.spin()
     except rospy.ROSInterruptException:
+            print("Exxx")
             cleanAndExit()
         
