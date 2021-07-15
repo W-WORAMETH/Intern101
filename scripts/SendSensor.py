@@ -89,8 +89,9 @@ def ReadSensor():
     print("===================")
 
     Data.data = [val1,val2,val1,val2]
-    # if(not rospy.is_shutdown()): 
-    #     sendData('sensor',Data)
+    if(not rospy.is_shutdown()): 
+        print("send")
+        sendData('sensor',Data)
 
     hx1.power_down()
     hx1.power_up()
@@ -110,6 +111,7 @@ if __name__ == '__main__':
             rospy.loginfo("TEST4")
             print("E")
             ReadSensor()
+            print("Z")
             rospy.spin()
     except rospy.ROSInterruptException:
             print("Exxx")
