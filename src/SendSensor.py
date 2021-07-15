@@ -39,6 +39,7 @@ hx2 = HX711(19,13)
 hx3 = HX711(21,26)
 hx4 = HX711(16,20)
 
+print("done initial")
 
 hx1.set_reading_format("MSB", "MSB")
 hx2.set_reading_format("MSB", "MSB")
@@ -74,15 +75,14 @@ def ReadSensor():
 
    
 
-  #  print("CH1 = %d" %(val1))
-  #  print("CH2 = %d" %(val2))
-  #  print("CH3 = %d" %(val3))
-  #  print("CH4 = %d" %(val4))
-  #  print("===================")
+    print("CH1 = %d" %(val1))
+    print("CH3 = %d" %(val3))
+    print("CH4 = %d" %(val4))
+    print("===================")
 
     Data.data = [val1,val2,val3,val4]
     if(not rospy.is_shutdown()): 
-            sendData('sensor',Data)
+        sendData('sensor',Data)
 
     hx1.power_down()
     hx1.power_up()
