@@ -38,8 +38,11 @@ def cleanAndExit():
 rospy.loginfo("TEST1")
 print("2")
 hx1 = HX711(6,5)
+print("2.2")
 hx2 = HX711(19,13)
+print("2.3")
 hx3 = HX711(21,26)
+print("2.4")
 hx4 = HX711(16,20)
 
 print("done initial")
