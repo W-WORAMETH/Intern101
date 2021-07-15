@@ -205,6 +205,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-#catkin_install_python(PROGRAMS src/RecieveSensor.py src/SendSensor.py src/RpiControl.py src/hx711.py
-#  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#)
+catkin_install_python(PROGRAMS scripts/RecieveSensor.py scripts/SendSensor.py scripts/RpiControl.py 
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

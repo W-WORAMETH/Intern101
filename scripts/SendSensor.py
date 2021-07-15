@@ -75,6 +75,8 @@ def ReadSensor():
     val2 = hx2.get_weight()
     # val3 = hx3.get_weight()
     # val4 = hx4.get_weight()
+
+   
     print("I")
     rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(val1))
     rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(val2))
@@ -88,7 +90,7 @@ def ReadSensor():
     # print("CH4 = %d" %(val4))
     print("===================")
 
-    Data.data = [val1,val2,val1,val2]
+    Data.data = [int(val1),int(val2),int(val1),int(val2)]
     if(not rospy.is_shutdown()): 
         print("send")
         sendData('sensor',Data)
