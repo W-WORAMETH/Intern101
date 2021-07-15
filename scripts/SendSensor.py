@@ -41,29 +41,29 @@ hx1 = HX711(6,5)
 print("2.2")
 hx2 = HX711(19,13)
 print("2.3")
-hx3 = HX711(21,26)
+# hx3 = HX711(21,26)
 print("2.4")
-hx4 = HX711(16,20)
+# hx4 = HX711(16,20)
 
 print("done initial")
 rospy.loginfo("TEST")
 
 hx1.set_reading_format("MSB", "MSB")
 hx2.set_reading_format("MSB", "MSB")
-hx3.set_reading_format("MSB", "MSB")
-hx4.set_reading_format("MSB", "MSB")
+# hx3.set_reading_format("MSB", "MSB")
+# hx4.set_reading_format("MSB", "MSB")
 
 
 hx1.set_reference_unit(1)
 hx2.set_reference_unit(1)
-hx3.set_reference_unit(1)
-hx4.set_reference_unit(1)
+# hx3.set_reference_unit(1)
+# hx4.set_reference_unit(1)
 
 
 hx1.reset()
 hx2.reset()
-hx3.reset()
-hx4.reset()
+# hx3.reset()
+# hx4.reset()
 
 # to use both channels, you'll need to tare them both
 #hx.tare_A()
@@ -73,8 +73,8 @@ def ReadSensor():
     print("F")
     val1 = hx1.get_weight()
     val2 = hx2.get_weight()
-    val3 = hx3.get_weight()
-    val4 = hx4.get_weight()
+    # val3 = hx3.get_weight()
+    # val4 = hx4.get_weight()
     print("I")
     rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(val1))
     rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(val2))
@@ -84,11 +84,11 @@ def ReadSensor():
    
 
     print("CH1 = %d" %(val1))
-    print("CH3 = %d" %(val3))
-    print("CH4 = %d" %(val4))
+    # print("CH3 = %d" %(val3))
+    # print("CH4 = %d" %(val4))
     print("===================")
 
-    Data.data = [val1,val2,val3,val4]
+    Data.data = [val1,val2,val1,val2]
     # if(not rospy.is_shutdown()): 
     #     sendData('sensor',Data)
 
@@ -96,10 +96,10 @@ def ReadSensor():
     hx1.power_up()
     hx2.power_down()
     hx2.power_up()
-    hx3.power_down()
-    hx3.power_up()
-    hx4.power_down()
-    hx4.power_up()
+    # hx3.power_down()
+    # hx3.power_up()
+    # hx4.power_down()
+    # hx4.power_up()
     rate.sleep()
 
 if __name__ == '__main__':
