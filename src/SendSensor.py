@@ -98,5 +98,6 @@ if __name__ == '__main__':
     try:
         while not rospy.is_shutdown():
             ReadSensor()
+            rospy.spin()
     except rospy.ROSInterruptException:
         pass
