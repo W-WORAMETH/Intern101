@@ -7,9 +7,8 @@ class HX711:
 
     def __init__(self, dout, pd_sck, gain=128):
         self.PD_SCK = pd_sck
-
         self.DOUT = dout
-
+        #print
         # Mutex for reading from the HX711, in case multiple threads in client
         # software try to access get values from the class at the same time.
         self.readLock = threading.Lock()
