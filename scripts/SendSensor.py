@@ -6,6 +6,7 @@ from intern101.hx711 import HX711
 
 
 rospy.init_node('rpi', anonymous=True)
+
 rate = rospy.Rate(1) # 1hz
 Massage = Int32MultiArray()
 Massage.data = []
@@ -83,8 +84,8 @@ def ReadSensor():
     print("===================")
 
     Data.data = [val1,val2,val3,val4]
-    if(not rospy.is_shutdown()): 
-        sendData('sensor',Data)
+    # if(not rospy.is_shutdown()): 
+    #     sendData('sensor',Data)
 
     hx1.power_down()
     hx1.power_up()
@@ -102,4 +103,5 @@ if __name__ == '__main__':
             ReadSensor()
             rospy.spin()
     except rospy.ROSInterruptException:
-        pass
+            cleanAndExit()
+        
