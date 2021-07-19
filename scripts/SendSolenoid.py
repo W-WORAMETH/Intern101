@@ -27,15 +27,18 @@ def sendData(Topic,Massage):
     pub.publish(Massage)
 
 def ReadKeyboard():
+    rospy.loginfo("Please Enter command [Example cmd :0 1 0 1 0 1 ]")
+    rospy.loginfo("cmd : ")
     cmd1,cmd2,cmd3,cmd4,cmd5,cmd6 = [int(e) for e in input().split()]
+    
     Data.data = [int(cmd1),int(cmd2),int(cmd3),int(cmd4),int(cmd5),int(cmd6)]
     if(not rospy.is_shutdown()): 
         rospy.loginfo(rospy.get_caller_id() + "   cmd1 = %s", str(Data.data[0]))
-        rospy.loginfo(rospy.get_caller_id() + "   cmd2 = %s", str(cmd2))
-        rospy.loginfo(rospy.get_caller_id() + "   cmd3 = %s", str(cmd3))
-        rospy.loginfo(rospy.get_caller_id() + "   cmd4 = %s", str(cmd4))
-        rospy.loginfo(rospy.get_caller_id() + "   cmd5 = %s", str(cmd5))
-        rospy.loginfo(rospy.get_caller_id() + "   cmd6 = %s", str(cmd6))
+        rospy.loginfo(rospy.get_caller_id() + "   cmd2 = %s", str(Data.data[1]))
+        rospy.loginfo(rospy.get_caller_id() + "   cmd3 = %s", str(Data.data[2]))
+        rospy.loginfo(rospy.get_caller_id() + "   cmd4 = %s", str(Data.data[3]))
+        rospy.loginfo(rospy.get_caller_id() + "   cmd5 = %s", str(Data.data[4]))
+        rospy.loginfo(rospy.get_caller_id() + "   cmd6 = %s", str(Data.data[5]))
         
         sendData('SendSolenoid',Data)
     
