@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import rospy
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Int8MultiArray
 import sys
 #from intern101.hx711 import HX711
 
@@ -14,15 +14,15 @@ def cleanAndExit():
 rospy.init_node('SendSolenoid', anonymous=True)
 
 rate = rospy.Rate(1) # 1hz
-Massage = Int32MultiArray()
+Massage = Int8MultiArray()
 Massage.data = []
 
-Data = Int32MultiArray()
+Data = Int8MultiArray()
 Data.data = []
 
 
 def sendData(Topic,Massage):
-    pub = rospy.Publisher(Topic,Int32MultiArray,queue_size=10)
+    pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
     rospy.loginfo(Massage)
     pub.publish(Massage)
 
