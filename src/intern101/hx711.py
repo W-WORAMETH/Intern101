@@ -108,8 +108,13 @@ class HX711:
         self.readLock.acquire()
 
         # Wait until HX711 is ready for us to read a sample.
-        while not self.is_ready():
-           pass
+        
+        #!while not self.is_ready():
+        #!   pass
+
+        if not self.is_ready():
+            print("Can't initial Sensor : "+ str(self))
+
 
         # Read three bytes of data from the HX711.
         firstByte  = self.readNextByte()
@@ -145,7 +150,7 @@ class HX711:
         # Join the raw bytes into a single 24bit 2s complement value.
         twosComplementValue = ((dataBytes[0] << 16) |
                                (dataBytes[1] << 8)  |
-                               dataBytes[2])
+                                dataBytes[2])
 
         if self.DEBUG_PRINTING:
             print("Twos: 0x%06x" % twosComplementValue)
@@ -226,7 +231,6 @@ class HX711:
 
 
     def get_value_A(self, times=3):
-        print("valueA")
         return self.read_median(times) - self.get_offset_A()
 
 
@@ -240,12 +244,10 @@ class HX711:
 
     # Compatibility function, uses channel A version
     def get_weight(self, times=3):
-        print("Weight")
         return self.get_weight_A(times)
 
 
     def get_weight_A(self, times=3):
-        print("WeightA")
         value = self.get_value_A(times)
         value = value / self.REFERENCE_UNIT
         return value
