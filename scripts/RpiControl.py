@@ -33,7 +33,7 @@ SolenoidCommand = Int8MultiArray()
 
 while(True) :
     
-    cmd1,cmd2,cmd3,cmd4,cmd5,cmd6 = [bool(e) for e in input().split(",")]
+    cmd1,cmd2,cmd3,cmd4,cmd5,cmd6 = [int(e) for e in input().split(",")]
 
     CmdSolenoid(Solenoid1,cmd1)
     CmdSolenoid(Solenoid2,cmd2)
