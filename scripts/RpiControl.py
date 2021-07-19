@@ -30,10 +30,10 @@ GPIO.setup(25, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
 
-def sendData(Topic,Massage):
-    pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
-    rospy.loginfo(Massage)
-    pub.publish(Massage)
+# def sendData(Topic,Massage):
+#     pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
+#     rospy.loginfo(Massage)
+#     pub.publish(Massage)
 
 def CmdSolenoid(Solenoid,cmd):
     if(cmd == 1):
@@ -45,15 +45,6 @@ def CmdSolenoid(Solenoid,cmd):
 
 SolenoidCommand = Int8MultiArray()
 
-
-
-
-def listener():
-    rospy.Subscriber('SendSolenoid',Int8MultiArray, callbackSensor)    
-    rospy.spin()
-
-if __name__ == '__main__':
-    listener()
 
 def callbackSensor(Data):
 
@@ -74,7 +65,12 @@ def callbackSensor(Data):
         rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
 
 
-    
+def listener():
+    rospy.Subscriber('SendSolenoid',Int8MultiArray, callbackSensor)    
+    rospy.spin()
+
+if __name__ == '__main__':
+    listener()    
 
     
 
