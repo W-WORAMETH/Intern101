@@ -109,8 +109,8 @@ class HX711:
 
         # Wait until HX711 is ready for us to read a sample.
         
-        #!while not self.is_ready():
-        #!   pass
+        while not self.is_ready():
+           pass
 
         if not self.is_ready():
             print("Can't initial Sensor : "+ str(self))
