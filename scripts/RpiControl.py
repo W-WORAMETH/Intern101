@@ -4,6 +4,15 @@ import sys
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int8MultiArray
 from std_msgs.msg import Bool
+import rospy
+
+rospy.init_node('RpiControl', anonymous=True)
+rate = rospy.Rate(1) # 1hz
+
+Data = Int8MultiArray()
+Data.data = []
+cmd = Int8MultiArray()
+cmd = []
 
 Solenoid1 = 4
 Solenoid2 = 17
@@ -21,6 +30,11 @@ GPIO.setup(25, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
 
+def sendData(Topic,Massage):
+    pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
+    rospy.loginfo(Massage)
+    pub.publish(Massage)
+
 def CmdSolenoid(Solenoid,cmd):
     if(cmd == 1):
         GPIO.output(Solenoid,GPIO.HIGH)
@@ -31,16 +45,41 @@ def CmdSolenoid(Solenoid,cmd):
 
 SolenoidCommand = Int8MultiArray()
 
+
+
+
+def listener():
+    rospy.init_node('RecieveSensor', anonymous=True)
+    rospy.Subscriber('sensor', Int8MultiArray, callbackSensor)    
+    rospy.spin()
+
+if __name__ == '__main__':
+    listener()
+
+def callbackSensor(Data):
+
+    if (Data.data != cmd.data):
+        cmd.data = Data.data
+        CmdSolenoid(Solenoid1,cmd[0].data)
+        CmdSolenoid(Solenoid2,cmd[1].data)
+        CmdSolenoid(Solenoid3,cmd[2].data)
+        CmdSolenoid(Solenoid4,cmd[3].data)
+        CmdSolenoid(Solenoid5,cmd[4].data)
+        CmdSolenoid(Solenoid6,cmd[5].data)
+
+        rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd[0].data))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd[1].data))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd[2].data))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd[3].data))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd[3].data))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd[3].data))
+    
+    
+
 while(True) :
     
-    cmd1,cmd2,cmd3,cmd4,cmd5,cmd6 = [int(e) for e in input().split(",")]
 
-    CmdSolenoid(Solenoid1,cmd1)
-    CmdSolenoid(Solenoid2,cmd2)
-    CmdSolenoid(Solenoid3,cmd3)
-    CmdSolenoid(Solenoid4,cmd4)
-    CmdSolenoid(Solenoid5,cmd5)
-    CmdSolenoid(Solenoid6,cmd6)
+    
 
     # GPIO.output(Solenoid1,GPIO.LOW)
     # GPIO.output(Solenoid2,GPIO.LOW)
