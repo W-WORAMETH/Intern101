@@ -49,7 +49,6 @@ SolenoidCommand = Int8MultiArray()
 
 
 def listener():
-    rospy.init_node('RPControl', anonymous=True)
     rospy.Subscriber('SendSolenoid',Int8MultiArray, callbackSensor)    
     rospy.spin()
 
