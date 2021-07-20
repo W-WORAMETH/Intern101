@@ -14,7 +14,7 @@ Dataset = Int16MultiArray()
 Dataset.data = []
 OldDataset = Int16MultiArray()
 OldDataset.data = []
-state = Int16MultiArray()
+state = UInt16MultiArray()
 state.data = []
 
 Solenoid1 = 4
@@ -57,7 +57,7 @@ def CmdSolenoid(Solenoid,cmd):
 def callbackSensor(Dataset):
 
     if (Dataset.data != OldDataset.data):
-        state.data = Dataset.data - OldDataset.data  #debouce and do one time when press
+        state = Dataset- OldDataset #debouce and do one time when press
         OldDataset.data = Dataset.data
         if(state.data[19]>=8 & state.data[19]<=15):  #digital input
             button = Dataset.data[19]
