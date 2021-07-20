@@ -12,7 +12,7 @@ rate = rospy.Rate(1) # 1hz
 Data = Int16MultiArray()
 Data.data = []
 cmd = Int16MultiArray()
-cmd = []
+cmd.data = []
 
 Solenoid1 = 4
 Solenoid2 = 17
@@ -50,7 +50,7 @@ def callbackSensor(Data):
 
     if (Data.data != cmd.data):
         cmd.data = Data.data
-        CmdSolenoid(Solenoid1,cmd.data[19])
+        # CmdSolenoid(Solenoid1,cmd.data[19])
         # CmdSolenoid(Solenoid2,cmd.data[1])
         # CmdSolenoid(Solenoid3,cmd.data[2])
         # CmdSolenoid(Solenoid4,cmd.data[3])
