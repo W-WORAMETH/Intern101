@@ -53,7 +53,7 @@ def CmdSolenoid(Solenoid,cmd):
         print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
-
+#hello
 
 
 
