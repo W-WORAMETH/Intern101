@@ -57,14 +57,15 @@ def CmdSolenoid(Solenoid,cmd):
 def callbackSensor(Dataset):
 
     if (Dataset.data != OldDataset.data):
-        state = Dataset- OldDataset #debouce and do one time when press
-        OldDataset.data = Dataset.data
-        if(state.data[19]>=8 & state.data[19]<=15):  #digital input
+        #debouce and do one time when press
+        
+        if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
             button = Dataset.data[19]
-            inputcmd = state.data[button] #use state because want rising adge
+            state = Dataset[button] - OldDataset[button]  
+            inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
                 toggleSolenoid(button)
-
+        OldDataset.data = Dataset.data
          
 
 
