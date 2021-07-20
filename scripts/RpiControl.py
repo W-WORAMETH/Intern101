@@ -108,7 +108,7 @@ def toggleSolenoid(button):
     elif(button ==11): Sl= Solenoid4
     elif(button ==12): Sl = Solenoid5
     elif(button ==13): Sl = Solenoid6
-    cmd = Bool(1)
+    cmd = (1)
     print("cmd"+ str(cmd))
     CmdSolenoid(Sl,cmd)
     
