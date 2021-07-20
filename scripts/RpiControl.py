@@ -61,7 +61,9 @@ def callbackSensor(Dataset):
         #debouce and do one time when press
         
         if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
+            
             button = Dataset.data[19]
+            print(button)
             state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
