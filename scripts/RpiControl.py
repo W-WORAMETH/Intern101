@@ -26,7 +26,7 @@ Solenoid4 = 25
 Solenoid5 = 24
 Solenoid6 = 23
 
-M1 = 10
+M1 = 18
 M2 = 22
 
 cmd = bool()
