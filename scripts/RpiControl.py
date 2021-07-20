@@ -65,7 +65,8 @@ def callbackSensor(Dataset):
             print(Dataset)
             button = Dataset.data[19]
             print(button)
-            state = Dataset.data[2] - OldDataset.data[2]  
+            print(Dataset.data[2])
+            #state = Dataset.data[2] - OldDataset.data[2]  
             inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
                 toggleSolenoid(button)
