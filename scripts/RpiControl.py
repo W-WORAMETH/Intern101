@@ -26,6 +26,9 @@ Solenoid4 = 25
 Solenoid5 = 24
 Solenoid6 = 23
 
+M1 = 10
+M2 = 22
+
 cmd = bool()
 
 GPIO.setmode(GPIO.BCM)
@@ -107,8 +110,8 @@ def toggleSolenoid(button):
     elif(button ==11): Sl= Solenoid4
     elif(button ==12): Sl = Solenoid5
     elif(button ==13): Sl = Solenoid6
-    #cmd = (1)
-    #print("cmd"+ str(cmd))
+    elif(button ==14): Sl = M1
+    elif(button ==15): Sl = M2
     CmdSolenoid(Sl,not(GPIO.input(Sl)))
 
     
