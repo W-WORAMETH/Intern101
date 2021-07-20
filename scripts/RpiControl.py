@@ -62,7 +62,7 @@ def callbackSensor(Dataset):
         
         if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
             button = Dataset.data[19]
-            state = Dataset[button] - OldDataset[button]  
+            state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
                 toggleSolenoid(button)
