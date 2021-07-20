@@ -15,7 +15,7 @@ rate = rospy.Rate(1) # 1hz
 Dataset = Int16MultiArray()
 Dataset.data = []
 OldDataset = Int16MultiArray()
-OldDataset.data = []
+OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
 
 
@@ -62,11 +62,11 @@ def callbackSensor(Dataset):
         #debouce and do one time when press
         
         if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
-            print(Dataset)
+            #print(Dataset)
             button = Dataset.data[19]
-            print(button)
-            print(Dataset.data[2])
-            #state = Dataset.data[2] - OldDataset.data[2]  
+            # print(button)
+            # print(Dataset.data[2])
+            state = Dataset.data[2] - OldDataset.data[2]  
             inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
                 toggleSolenoid(button)
