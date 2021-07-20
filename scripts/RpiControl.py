@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from scripts.RecieveSensor import Data
 import time
 import sys
 # import RPi.GPIO as GPIO
@@ -61,7 +62,7 @@ def callbackSensor(Dataset):
         #debouce and do one time when press
         
         if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
-            
+            print(Dataset)
             button = Dataset.data[19]
             print(button)
             state = Dataset.data[2] - OldDataset.data[2]  
