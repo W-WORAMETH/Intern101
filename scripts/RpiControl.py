@@ -109,7 +109,7 @@ def toggleSolenoid(button):
     elif(button ==13): Sl = Solenoid6
     #cmd = (1)
     #print("cmd"+ str(cmd))
-    CmdSolenoid(Sl,GPIO.input(Sl)==1)
+    CmdSolenoid(Sl,GPIO.input(Sl))
 
     
 
