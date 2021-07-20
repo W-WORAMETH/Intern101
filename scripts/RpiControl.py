@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from scripts.RecieveSensor import Data
+#from scripts.RecieveSensor import Data
 import time
 import sys
 # import RPi.GPIO as GPIO
