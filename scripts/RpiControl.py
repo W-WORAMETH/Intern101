@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import time
 import sys
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
 import rospy
@@ -21,27 +21,27 @@ Solenoid4 = 25
 Solenoid5 = 24
 Solenoid6 = 23
 
-GPIO.setmode(GPIO.BCM)
+# GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(4, GPIO.OUT)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(27, GPIO.OUT)
-GPIO.setup(25, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-GPIO.setup(23, GPIO.OUT)
+# GPIO.setup(4, GPIO.OUT)
+# GPIO.setup(17, GPIO.OUT)
+# GPIO.setup(27, GPIO.OUT)
+# GPIO.setup(25, GPIO.OUT)
+# GPIO.setup(24, GPIO.OUT)
+# GPIO.setup(23, GPIO.OUT)
 
 # def sendData(Topic,Massage):
 #     pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
 #     rospy.loginfo(Massage)
 #     pub.publish(Massage)
 
-def CmdSolenoid(Solenoid,cmd):
-    if(cmd == 1):
-        GPIO.output(Solenoid,GPIO.HIGH)
-    elif(cmd == 0):
-        GPIO.output(Solenoid,GPIO.LOW)
-    else:
-        print("error : command must be 0 or 1")
+# def CmdSolenoid(Solenoid,cmd):
+#     if(cmd == 1):
+#         GPIO.output(Solenoid,GPIO.HIGH)
+#     elif(cmd == 0):
+#         GPIO.output(Solenoid,GPIO.LOW)
+#     else:
+#         print("error : command must be 0 or 1")
 
 SolenoidCommand = Int16MultiArray()
 
