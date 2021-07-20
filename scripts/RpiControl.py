@@ -4,6 +4,7 @@ import sys
 # import RPi.GPIO as GPIO
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import UInt16MultiArray
+from std_msgs.msg import UInt8
 from std_msgs.msg import Bool
 import rospy
 
@@ -14,7 +15,7 @@ Dataset = Int16MultiArray()
 Dataset.data = []
 OldDataset = Int16MultiArray()
 OldDataset.data = []
-state = UInt16MultiArray()
+state = UInt8()
 state.data = []
 
 Solenoid1 = 4
