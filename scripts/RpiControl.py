@@ -14,7 +14,7 @@ Dataset = Int16MultiArray()
 Dataset.data = []
 OldDataset = Int16MultiArray()
 OldDataset.data = []
-state = UInt16MultiArray()
+state = Int16MultiArray()
 state.data = []
 
 Solenoid1 = 4
