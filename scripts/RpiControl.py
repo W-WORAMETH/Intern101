@@ -2,7 +2,7 @@
 #from scripts.RecieveSensor import Data
 import time
 import sys
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import UInt16MultiArray
 from std_msgs.msg import UInt8
@@ -28,14 +28,13 @@ Solenoid6 = 23
 
 cmd = bool()
 
-# GPIO.setmode(GPIO.BCM)
-
-# GPIO.setup(4, GPIO.OUT)
-# GPIO.setup(17, GPIO.OUT)
-# GPIO.setup(27, GPIO.OUT)
-# GPIO.setup(25, GPIO.OUT)
-# GPIO.setup(24, GPIO.OUT)
-# GPIO.setup(23, GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
 
 # def sendData(Topic,Massage):
 #     pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
@@ -46,10 +45,10 @@ def CmdSolenoid(Solenoid,cmd):
     pass
     print("def Cmd")
     if(cmd == 1):
-        # GPIO.output(Solenoid,GPIO.HIGH)
+        GPIO.output(Solenoid,GPIO.HIGH)
         print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
     elif(cmd == 0):
-        # GPIO.output(Solenoid,GPIO.LOW)
+        GPIO.output(Solenoid,GPIO.LOW)
         print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
@@ -108,9 +107,10 @@ def toggleSolenoid(button):
     elif(button ==11): Sl= Solenoid4
     elif(button ==12): Sl = Solenoid5
     elif(button ==13): Sl = Solenoid6
-    cmd = (1)
-    print("cmd"+ str(cmd))
-    CmdSolenoid(Sl,cmd)
+    #cmd = (1)
+    #print("cmd"+ str(cmd))
+    CmdSolenoid(Sl,GPIO.input(Sl)==1)
+
     
 
 def listener():
