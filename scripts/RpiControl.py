@@ -42,6 +42,12 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
 GPIO.setup(22, GPIO.OUT)
 
+GPIO.output(Solenoid1,GPIO.HIGH)
+GPIO.output(Solenoid2,GPIO.HIGH)
+GPIO.output(Solenoid3,GPIO.HIGH)
+GPIO.output(Solenoid4,GPIO.HIGH)
+GPIO.output(Solenoid5,GPIO.HIGH)
+GPIO.output(Solenoid6,GPIO.HIGH)
 
 # def sendData(Topic,Massage):
 #     pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
