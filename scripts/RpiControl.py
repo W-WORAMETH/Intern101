@@ -62,17 +62,17 @@ def callbackSensor(Dataset):
     if (Dataset.data != OldDataset.data):
         #debouce and do one time when press
         
-        if(Dataset.data[19]>=8 & Dataset.data[19]<=15):  #digital input
+        if(Dataset.data[19]>=8 and Dataset.data[19]<=15):  #digital input
             #print(Dataset)
             button = Dataset.data[19]
             # print(button)
-            # print(Dataset.data[2])
-            state = Dataset.data[2] - OldDataset.data[2]  
+            print(Dataset.data[19])
+            state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
-            if inputcmd ==1 :  #rising adge occure
+            if inputcmd == 1 :  #rising adge occure
                 print("prp toggle")
                 toggleSolenoid(button)
-        OldDataset.data = Dataset.data
+        OldDataset.data = Dataset.data    
          
 
 
@@ -92,7 +92,7 @@ def callbackSensor(Dataset):
 
 
         # rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd.data[19]))
-        rospy.loginfo(Dataset)
+        #rospy.loginfo(Dataset)
         # rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd.data[1]))
         # rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd.data[2]))
         # rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd.data[3]))
