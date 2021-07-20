@@ -44,6 +44,7 @@ cmd = bool()
 
 def CmdSolenoid(Solenoid,cmd):
     pass
+    print("def Cmd")
     if(cmd == 1):
         # GPIO.output(Solenoid,GPIO.HIGH)
         print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
@@ -69,6 +70,7 @@ def callbackSensor(Dataset):
             state = Dataset.data[2] - OldDataset.data[2]  
             inputcmd = state   #use state because want rising adge
             if inputcmd ==1 :  #rising adge occure
+                print("prp toggle")
                 toggleSolenoid(button)
         OldDataset.data = Dataset.data
          
@@ -107,6 +109,7 @@ def toggleSolenoid(button):
     elif(button ==12): Sl = Solenoid5
     elif(button ==13): Sl = Solenoid6
     cmd = Bool(1)
+    print("cmd"+ str(cmd))
     CmdSolenoid(Sl,cmd)
     
 
