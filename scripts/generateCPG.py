@@ -44,7 +44,7 @@ def generateCPG() :
     outputH1 = math.tanh(activityH1)
     outputH2 = math.tanh(activityH2)
 
-    output = [outputH1, outputH2]
+    output.data = [outputH1, outputH2]
     sendData('CPG',output)
 
     
