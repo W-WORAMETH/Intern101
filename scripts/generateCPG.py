@@ -1,6 +1,5 @@
 #!CPG part
 import math
-from scripts.SendSensor import Massage
 import sys
 import rospy
 from std_msgs.msg import Float32MultiArray
