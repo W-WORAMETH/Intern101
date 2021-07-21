@@ -4,7 +4,7 @@ import sys
 import rospy
 from std_msgs.msg import Float64MultiArray
 
-MI = 2
+MI = 1
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -24,7 +24,7 @@ BiasH1 = 0.0
 BiasH2 = 0.0
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(50)
+rate = rospy.Rate(0.1)
 
 def cleanAndExit():
     print("Cleaning...")    
