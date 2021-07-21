@@ -4,7 +4,7 @@ import sys
 import rospy
 from std_msgs.msg import Float64MultiArray
 
-MI = 1.1
+MI = 2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
