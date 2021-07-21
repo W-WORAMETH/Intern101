@@ -20,6 +20,8 @@ output = []
 BiasH1 = 0.0
 BiasH2 = 0.0
 
+rospy.init_node('generateCPG', anonymous=True)
+
 def cleanAndExit():
     print("Cleaning...")    
     print("Stop Working ...")
