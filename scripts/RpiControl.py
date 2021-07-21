@@ -8,6 +8,9 @@ from std_msgs.msg import UInt16MultiArray
 from std_msgs.msg import UInt8
 from std_msgs.msg import Bool
 import rospy
+import math
+import matplotlib as plt
+
 
 rospy.init_node('RpiControl', anonymous=True)
 rate = rospy.Rate(1) # 1hz
@@ -54,6 +57,34 @@ GPIO.output(Solenoid6,GPIO.HIGH)
 #     rospy.loginfo(Massage)
 #     pub.publish(Massage)
 
+#!CPG part
+MI = 1.1
+WeightH1_H1 = 1.4
+WeightH1_H2 = 0.18 + MI
+WeightH2_H2 = 1.4
+WeightH2_H1 = -(0.18 + MI) 
+activityH1 = 0
+activityH2 = 0
+outputH1 = 0.01
+outputH2 = 0.01
+
+BiasH1 = 0.0
+BiasH2 = 0.0
+
+def CpgGenerate():
+    global outputH1
+    global outputH2
+
+    activityH1 = WeightH1_H1 * outputH1 + WeightH1_H2 * outputH2 + BiasH1
+    activityH2 = WeightH2_H2 * outputH2 + WeightH2_H1 * outputH1 + BiasH2
+
+    outputH1 = math.tanh(activityH1)
+    outputH2 = math.tanh(activityH2)
+    
+    plt.plot(outputH1)
+
+
+
 def CmdSolenoid(Solenoid,cmd):
     pass
     print("def Cmd")
@@ -71,6 +102,7 @@ def CmdSolenoid(Solenoid,cmd):
 
 def callbackSensor(Dataset):
 
+
     if (Dataset.data != OldDataset.data):
         #debouce and do one time when press
         
@@ -86,7 +118,7 @@ def callbackSensor(Dataset):
                 toggleSolenoid(button)
         OldDataset.data = Dataset.data    
          
-
+        #if Dataset.data[19]>= Right joy
 
 
 
@@ -127,13 +159,14 @@ def toggleSolenoid(button):
     
 
 def listener():
+    CpgGenerate()
     rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor)    
     rospy.spin()
 
 if __name__ == '__main__':
     listener()  
-    print("fvck")  
 
+  
     
 
     # GPIO.output(Solenoid1,GPIO.LOW)
