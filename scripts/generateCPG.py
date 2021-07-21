@@ -1,5 +1,6 @@
 #!CPG part
 import math
+from scripts.SendSensor import Massage
 import sys
 import rospy
 from std_msgs.msg import Float32MultiArray
@@ -13,6 +14,9 @@ activityH1 = 0
 activityH2 = 0
 outputH1 = 0.01
 outputH2 = 0.01
+
+Massage = Float32MultiArray()
+Massage = []
 
 output = Float32MultiArray()
 output = []
