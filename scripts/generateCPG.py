@@ -15,10 +15,10 @@ outputH1 = 0.01
 outputH2 = 0.01
 
 Massage = Float32MultiArray()
-Massage = []
+Massage.data = []
 
 output = Float32MultiArray()
-output = []
+output.data = []
 
 BiasH1 = 0.0
 BiasH2 = 0.0
