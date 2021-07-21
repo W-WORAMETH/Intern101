@@ -24,7 +24,7 @@ BiasH1 = 0.0
 BiasH2 = 0.0
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(0.01)
+rate = rospy.Rate(100)
 def cleanAndExit():
     print("Cleaning...")    
     print("Stop Working ...")
