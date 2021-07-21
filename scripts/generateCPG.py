@@ -2,7 +2,7 @@
 import math
 import sys
 import rospy
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float64MultiArray
 
 MI = 1.1
 WeightH1_H1 = 1.4
@@ -14,24 +14,24 @@ activityH2 = 0
 outputH1 = 0.01
 outputH2 = 0.01
 
-Massage = Float32MultiArray()
+Massage = Float64MultiArray()
 Massage.data = []
 
-output = Float32MultiArray()
+output = Float64MultiArray()
 output.data = []
 
 BiasH1 = 0.0
 BiasH2 = 0.0
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(100)
+
 def cleanAndExit():
     print("Cleaning...")    
     print("Stop Working ...")
     sys.exit()
 
 def sendData(Topic,Massage):
-    pub = rospy.Publisher(Topic,Float32MultiArray,queue_size=10)
+    pub = rospy.Publisher(Topic,Float64MultiArray,queue_size=10)
     rospy.loginfo(Massage)
     pub.publish(Massage)
 
@@ -46,7 +46,7 @@ def generateCPG() :
 
     output.data = [outputH1, outputH2]
     sendData('CPG',output)
-    rate.sleep()
+ 
     
 
     
