@@ -46,7 +46,7 @@ def generateCPG() :
 
     output.data = [outputH1, outputH2]
     sendData('CPG',output)
-    rate.sleep()
+    # rate.sleep()
     
 
     
