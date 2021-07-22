@@ -33,7 +33,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(1)
+rate = rospy.Rate()
 
 def restartCPG():
     global MI
@@ -121,7 +121,7 @@ def listener():
     if(trigger == False):
         sendData('CPG',output)
 
-    #rospy.spin()
+    rospy.spin()
   
 
 
