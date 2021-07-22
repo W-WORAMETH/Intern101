@@ -196,7 +196,7 @@ def callbackJoy(Dataset):
          
      
          
-        else if(Dataset.data[19] == 7):  #! must be edit
+        elif(Dataset.data[19] == 7):  #! must be edit
             print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
