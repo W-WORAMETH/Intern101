@@ -107,12 +107,12 @@ def CmdChannal(Channal,cmd):
 def toggleChannal(button):
     pass
     Sl = 0
-    if(button ==8):     Sl = Channal1
-    elif(button ==9):   Sl = Channal2
-    elif(button ==10):  Sl = Channal3
-    elif(button ==11):  Sl = Channal4
-    elif(button ==12):  Sl = Channal5
-    elif(button ==13):  Sl = Channal6
+    if(button ==8):     Sl = Channal6
+    elif(button ==9):   Sl = Channal4
+    elif(button ==10):  Sl = Channal5
+    elif(button ==11):  Sl = Channal3
+    elif(button ==12):  Sl = Channal1
+    elif(button ==13):  Sl = Channal2
 
     elif(button ==14):  Sl = M1
     elif(button ==15):  Sl = M2
