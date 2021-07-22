@@ -237,10 +237,7 @@ def listener():
         sequenceRobotForward()
     if(trigger == False):
         pass
-
-
-
-    # rospy.spin()
+    rospy.spin()
 
 if __name__ == '__main__':
     try:
