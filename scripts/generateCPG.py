@@ -109,16 +109,18 @@ def callbackJoy(Dataset):
 
         Dataset.data = OldDataset.data
 
+  
+
+    
+def listener():
+    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)   
+     
     if(trigger == True):
         generateCPG()  #runnew cpg value
         sendData('CPG',output)
     if(trigger == False):
         sendData('CPG',output)
 
-
-    
-def listener():
-    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)  
     rospy.spin()
   
 
