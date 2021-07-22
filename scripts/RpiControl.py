@@ -169,16 +169,18 @@ def callbackSensor(Dataset):
             if inputcmd == 1 :  #rising adge occure
                 print("prp toggle")
                 toggleChannal(button)
-        OldDataset.data = Dataset.data    
+        
          
-        if Dataset.data[19] == 7:  #! must be edit
+        if(Dataset.data[19] == 7):  #! must be edit
+            print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
+                print("receive2")
                 trigger = True
                 sequenceRobotForward()
 
-
+        OldDataset.data = Dataset.data    
 
 
 
