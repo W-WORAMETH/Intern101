@@ -193,21 +193,21 @@ def callbackJoy(Dataset):
             if inputcmd == 1 :  #rising adge occure
                 print("prp toggle")
                 toggleChannal(button)
-       
-         
-        if(Dataset.data[19] == 7):  #! must be edit
-            print("receive1")
-            button = Dataset.data[19]
-            inputcmd = Dataset.data[button]
-            if inputcmd == -32767: #! must be edit
-                print("receive2")   
-                trigger = True
-            elif inputcmd == 0: #! must be edit
-                print("receive3")
-                trigger = False
-            
         OldDataset.data = Dataset.data    
-    
+     
+         
+    if(Dataset.data[19] == 7):  #! must be edit
+        print("receive1")
+        button = Dataset.data[19]
+        inputcmd = Dataset.data[button]
+        if inputcmd == -32767: #! must be edit
+            print("receive2")   
+            trigger = True
+        elif inputcmd == 0: #! must be edit
+            print("receive3")
+            trigger = False
+            
+        
 
 
             
