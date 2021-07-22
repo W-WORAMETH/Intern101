@@ -80,7 +80,7 @@ def cleanAndExit():
 
 def triggerCPG(Topic,Massage):
     pub = rospy.Publisher(Topic,Bool,queue_size=10)
-    rospy.loginfo(Massage)
+    # rospy.loginfo(Massage)
     pub.publish(Massage)
     if(trigger == True): sequenceRobotForward()
 
@@ -220,7 +220,7 @@ def listener():
     triggerCPG('trigger',trigger)
     rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
     #rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
-    rospy.spin()
+    # rospy.spin()
 
 if __name__ == '__main__':
     try:
