@@ -15,7 +15,7 @@ import numpy as np
 
 
 rospy.init_node('RpiControl', anonymous=True)
-rate = rospy.Rate(1000) # 1hz
+rate = rospy.Rate(10) # 1hz
 
 Dataset = Int16MultiArray()
 Dataset.data = []
@@ -118,6 +118,8 @@ def toggleChannal(button):
 def callbackCPG(CPG):
     global FrontCPG
     global BackCPG
+
+    print("callback")
 
     FrontCPG = CPG.data[0]
     BackCPG = CPG.data[1]
@@ -237,7 +239,7 @@ def listener():
         sequenceRobotForward()
     if(trigger == False):
         pass
-    rospy.spin()
+    #rospy.spin()
 
 if __name__ == '__main__':
     try:
