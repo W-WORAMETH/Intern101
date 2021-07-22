@@ -19,9 +19,9 @@ import numpy as np
 rospy.init_node('RpiControl', anonymous=True)
 rate = rospy.Rate(10) # 1hz
 
-Dataset = Int32MultiArray()
+Dataset = Int16MultiArray()
 Dataset.data = []
-OldDataset = Int32MultiArray()
+OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
 CPG = Float64MultiArray()
@@ -238,7 +238,7 @@ def callbackJoy(Dataset):
 
 def listener():
     global trigger
-    rospy.Subscriber('joyStick',Int32MultiArray, callbackJoy) 
+    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
     rospy.Subscriber('CPG',Float64MultiArray,callbackCPG)
     if(trigger == True):
         sequenceRobotForward()
