@@ -86,8 +86,6 @@ def cleanAndExit():
 #     pub.publish(Massage)
 #     if(trigger == True): sequenceRobotForward()
 
-FrontCPG = float()
-BackCPG = float()
 
 def CmdChannal(Channal,cmd):
     pass
