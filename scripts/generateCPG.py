@@ -55,8 +55,8 @@ def restartCPG():
     WeightH2_H1 = -(0.18 + MI) 
     activityH1 = 0
     activityH2 = 0
-    outputH1 = 0.01
-    outputH2 = 0.01
+    outputH1 = 0.00001
+    outputH2 = 0.00001
 
 def cleanAndExit():
     print("Cleaning...")    
