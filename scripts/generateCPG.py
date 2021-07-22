@@ -46,8 +46,8 @@ def restartCPG():
     WeightH2_H1 = -(0.18 + MI) 
     activityH1 = 0
     activityH2 = 0
-    outputH1 = 0.01
-    outputH2 = 0.01
+    outputH1 = 0.0001
+    outputH2 = 0.0001
 
 def cleanAndExit():
     print("Cleaning...")    
@@ -79,7 +79,7 @@ def generateCPG() :
 
     output.data = [outputH1, -outputH1]
     sendData('CPG',output)
-    # rate.sleep()
+    rate.sleep()
 
 def triggerCPG(trigger) :
 
@@ -88,7 +88,7 @@ def triggerCPG(trigger) :
         generateCPG()
     else :
         print("waiting for command ... ")
-        restartCPG()
+        # restartCPG()
         pass
 
 
