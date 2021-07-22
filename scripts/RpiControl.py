@@ -243,7 +243,6 @@ def listener():
         sequenceRobotForward()
     elif(trigger == False):
         pass
-    print("end")
     rate.sleep()
     #rospy.spin()
 
