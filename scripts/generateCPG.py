@@ -4,9 +4,8 @@ import sys
 import time
 import rospy
 from std_msgs.msg import Float64MultiArray
-from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
-MI = 0.02
+MI = 2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -25,12 +24,8 @@ output.data = []
 BiasH1 = 0.0
 BiasH2 = 0.0
 
-Dataset = Int16MultiArray()
-Dataset.data = []
-
-
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(100)
+rate = rospy.Rate(10)
 
 def restartCPG():
     global MI
@@ -98,23 +93,11 @@ def triggerCPG(trigger) :
         # restartCPG()
         pass
 
-# def callbackSensor(Dataset):
-#     global MI
-#     if(Dataset.data[19] == 6): 
-#         button = Dataset.data[19]
-#         inputcmd = Dataset.data[button]
-#         if inputcmd == -32767: #! must be edit
-            
-#             MI += 0.01
-#         elif inputcmd == 32767: #! must be edit
-           
-#             MI -= 0.01
-    
+
 
 def listener():
-    #rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
     rospy.Subscriber('trigger', Bool, triggerCPG)  
-    rospy.spin(1)
+    rospy.spin()
   
 
 
