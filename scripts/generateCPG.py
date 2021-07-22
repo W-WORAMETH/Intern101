@@ -26,6 +26,29 @@ BiasH2 = 0.0
 rospy.init_node('generateCPG', anonymous=True)
 rate = rospy.Rate(1)
 
+def restartCPG():
+    global MI
+    global WeightH1_H1
+    global WeightH1_H2
+    global WeightH2_H2
+    global WeightH2_H1
+    global activityH1 
+    global activityH2
+    global activityH2
+    global outputH1
+    global outputH2
+
+
+    MI = 0.2
+    WeightH1_H1 = 1.4
+    WeightH1_H2 = 0.18 + MI
+    WeightH2_H2 = 1.4
+    WeightH2_H1 = -(0.18 + MI) 
+    activityH1 = 0
+    activityH2 = 0
+    outputH1 = 0.01
+    outputH2 = 0.01
+
 def cleanAndExit():
     print("Cleaning...")    
     print("Stop Working ...")
@@ -55,6 +78,7 @@ def triggerCPG(trigger) :
         generateCPG()
     else :
         print("waiting for command ... ")
+        restartCPG()
         pass
 
 
