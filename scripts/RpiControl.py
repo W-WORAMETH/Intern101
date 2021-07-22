@@ -118,7 +118,7 @@ def callbackCPG(CPG):
     pass
 
 def sequenceRobotForward() :
-
+    global Solenoid
     if(FrontCPG == 0)   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
     elif(FrontCPG < 0)  : FrontMagnetic = 0
@@ -147,7 +147,7 @@ def sequenceRobotForward() :
     if(Solenoid == 1):
         CmdChannal(Solenoid1,1)
         CmdChannal(Solenoid2,1)
-    if(Solenoid == 0):
+    elif(Solenoid == 0):
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
