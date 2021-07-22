@@ -5,7 +5,7 @@ import time
 import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Bool
-MI = 1.5
+MI = 0.2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -81,7 +81,7 @@ def generateCPG() :
     output.data = [outputH1, -outputH1]
     sendData('CPG',output)
     
-    rate.sleep()
+    # rate.sleep()
 
 def triggerCPG(trigger) :
 
