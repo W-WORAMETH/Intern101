@@ -79,8 +79,9 @@ def cleanAndExit():
 
 
 def triggerCPG(Topic,Massage):
+    global trigger
     pub = rospy.Publisher(Topic,Bool,queue_size=10)
-    # rospy.loginfo(Massage)
+    rospy.loginfo(Massage)
     pub.publish(Massage)
     if(trigger == True): sequenceRobotForward()
 
@@ -130,7 +131,7 @@ def sequenceRobotForward() :
     
     print("FrontCPG = "+str(FrontCPG) )
     print("BackCPG = "+str(BackCPG) )
-    
+
     if(FrontCPG == 0)   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
     elif(FrontCPG < 0)  : FrontMagnetic = 0
@@ -224,6 +225,7 @@ def callbackSensor(Dataset):
     
 
 def listener():
+    global trigger
     triggerCPG('trigger',trigger)
     rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
     rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
