@@ -3,7 +3,7 @@ import math
 import sys
 import rospy
 from std_msgs.msg import Float64MultiArray
-
+from std_msgs.msg import Bool
 MI = 0.2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
@@ -48,14 +48,29 @@ def generateCPG() :
     output.data = [outputH1, -outputH1]
     sendData('CPG',output)
     rate.sleep()
- 
+
+def triggerCPG(trigger) :
+    if(trigger.data == True):
+        generateCPG()
+    else :
+        print("waiting for command ... ")
+        pass
+
+
+
+def listener():
+    rospy.init_node('RecieveSensor', anonymous=True)
+    rospy.Subscriber('trigger', Bool, triggerCPG)    
+    rospy.spin()
   
 
 
 if __name__ == '__main__':
     try:
         while not rospy.is_shutdown():
-            generateCPG()
+            listener()
     except rospy.ROSInterruptException:
             cleanAndExit()
         
+
+
