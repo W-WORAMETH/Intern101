@@ -50,7 +50,7 @@ def generateCPG() :
     rate.sleep()
 
 def triggerCPG(trigger) :
-    print("callback")
+    print(trigger.data)
     if(trigger.data == True):
         generateCPG()
     else :
