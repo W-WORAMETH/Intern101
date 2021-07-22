@@ -33,7 +33,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(10)
+rate = rospy.Rate(1)
 
 def restartCPG():
     global MI
@@ -89,7 +89,7 @@ def generateCPG() :
     output.data = [outputH1, -outputH1]
     
     
-    rate.sleep()
+  
 
 def callbackJoy(Dataset):
     pass
