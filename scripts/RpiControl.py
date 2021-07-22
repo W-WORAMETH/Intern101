@@ -23,62 +23,136 @@ OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
 
 
-Solenoid1 = 4
-Solenoid2 = 17
-Solenoid3 = 27
-Solenoid4 = 25
-Solenoid5 = 24
-Solenoid6 = 23
+Channal1 = 4
+Channal2 = 17
+Channal3 = 27
+Channal4 = 25
+Channal5 = 24
+Channal6 = 23
 
 M1 = 18
 M2 = 22
 
+#!-----------Define----------
+
+Solenoid1 = Channal1
+Solenoid2 = Channal2 
+magneticFL = Channal3
+magneticFR = Channal4
+magneticBL = Channal5
+magneticBR = Channal6
+
+
+#!---------------------------
+
+
 cmd = bool()
+trigger = bool()
+trigger = False
 
 #pin
 # GPIO.setmode(GPIO.BCM)
-# GPIO.setup(4, GPIO.OUT)
-# GPIO.setup(17, GPIO.OUT)
-# GPIO.setup(27, GPIO.OUT)
-# GPIO.setup(25, GPIO.OUT)
-# GPIO.setup(24, GPIO.OUT)
-# GPIO.setup(23, GPIO.OUT)
-# GPIO.setup(18, GPIO.OUT)
-# GPIO.setup(22, GPIO.OUT)
+# GPIO.setup(Channal1, GPIO.OUT)
+# GPIO.setup(Channal2, GPIO.OUT)
+# GPIO.setup(Channal3, GPIO.OUT)
+# GPIO.setup(Channal4, GPIO.OUT)
+# GPIO.setup(Channal5, GPIO.OUT)
+# GPIO.setup(Channal6, GPIO.OUT)
+# GPIO.setup(M1, GPIO.OUT)
+# GPIO.setup(M2, GPIO.OUT)
 
-# GPIO.output(Solenoid1,GPIO.HIGH)
-# GPIO.output(Solenoid2,GPIO.HIGH)
-# GPIO.output(Solenoid3,GPIO.HIGH)
-# GPIO.output(Solenoid4,GPIO.HIGH)
-# GPIO.output(Solenoid5,GPIO.HIGH)
-# GPIO.output(Solenoid6,GPIO.HIGH)
+# GPIO.output(Channal1,GPIO.HIGH)
+# GPIO.output(Channal2,GPIO.HIGH)
+# GPIO.output(Channal3,GPIO.HIGH)
+# GPIO.output(Channal4,GPIO.HIGH)
+# GPIO.output(Channal5,GPIO.HIGH)
+# GPIO.output(Channal6,GPIO.HIGH)
+# GPIO.output(M1,GPIO.LOW)
+# GPIO.output(M2,GPIO.LOW)
 
-# def sendData(Topic,Massage):
-#     pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
-#     rospy.loginfo(Massage)
-#     pub.publish(Massage)
-
-
-
-def callbackCPG(CPG):
-    pass
+def cleanAndExit():
+    print("Cleaning...")
+    #GPIO.cleanup()    
+    print("Stop Working ...")
+    sys.exit()
 
 
+def triggerCPG(Topic,Massage):
+    pub = rospy.Publisher(Topic,Bool,queue_size=10)
+    rospy.loginfo(Massage)
+    pub.publish(Massage)
 
-def CmdSolenoid(Solenoid,cmd):
+FrontCPG = float()
+BackCPG = float()
+
+def CmdChannal(Channal,cmd):
     pass
     print("def Cmd")
     if(cmd == 1):
-        # GPIO.output(Solenoid,GPIO.HIGH)
-        print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
+        # GPIO.output(Channal,GPIO.HIGH)
+        print("GPIO " + str(Channal) +" = "+ str(cmd) )
     elif(cmd == 0):
         # GPIO.output(Solenoid,GPIO.LOW)
-        print("GPIO " + str(Solenoid) +" = "+ str(cmd) )
+        print("GPIO " + str(Channal) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
-#hello
+
+def toggleChannal(button):
+    pass
+    Sl = 0
+    if(button ==8):     Sl = Channal1
+    elif(button ==9):   Sl = Channal2
+    elif(button ==10):  Sl = Channal3
+    elif(button ==11):  Sl = Channal4
+    elif(button ==12):  Sl = Channal5
+    elif(button ==13):  Sl = Channal6
+
+    elif(button ==14):  Sl = M1
+    elif(button ==15):  Sl = M2
+    # CmdChannal(Sl,not(GPIO.input(Sl)))
 
 
+def callbackCPG(CPG):
+    FrontCPG = CPG.data[0]
+    BackCPG = CPG.data[1]
+    pass
+
+def sequenceRobotForward() :
+
+    if(FrontCPG == 0)   : FrontMagnetic = 1
+    elif(FrontCPG > 0)  : FrontMagnetic = 1
+    elif(FrontCPG < 0)  : FrontMagnetic = 0
+    
+    if(BackCPG == 0)    : BackMagnetic = 1
+    elif(BackCPG > 0)   : BackMagnetic = 1
+    elif(BackCPG < 0)   : BackMagnetic = 0
+
+    if(FrontCPG > 0.5)  : 
+        Solenoid = 1
+    elif(FrontCPG < -0.5) : 
+        Solenoid = 0
+
+    # can seperated to another function if create more than one direction of seq 
+    if(FrontMagnetic == 1) : 
+        CmdChannal(magneticFL,1)
+        CmdChannal(magneticFR,1)
+    elif(FrontMagnetic == 0) : 
+        CmdChannal(magneticFL,0)
+        CmdChannal(magneticFR,0)
+    if(BackMagnetic == 1) : 
+        CmdChannal(magneticBL,1)
+        CmdChannal(magneticBR,1)
+    elif(BackMagnetic == 0) : 
+        CmdChannal(magneticBL,0)
+        CmdChannal(magneticBR,0)
+    if(Solenoid == 1):
+        CmdChannal(Solenoid1,1)
+        CmdChannal(Solenoid2,1)
+    if(Solenoid == 0):
+        CmdChannal(Solenoid1,0)
+        CmdChannal(Solenoid2,0)
+
+    
 
 def callbackSensor(Dataset):
 
@@ -89,16 +163,23 @@ def callbackSensor(Dataset):
         if(Dataset.data[19]>=8 and Dataset.data[19]<=15):  #digital input
             #print(Dataset)
             button = Dataset.data[19]
-            # print(button)
-            print(Dataset.data[19])
+            #print(button)
+            #print(Dataset.data[19])
             state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd == 1 :  #rising adge occure
                 print("prp toggle")
-                toggleSolenoid(button)
+                toggleChannal(button)
         OldDataset.data = Dataset.data    
          
-        #if Dataset.data[19]>= Right joy
+        if Dataset.data[19] == 1:  #! must be edit
+            button = Dataset.data[19]
+            inputcmd = Dataset.data[button]
+            if inputcmd == 333333: #! must be edit
+                trigger = True
+                sequenceRobotForward()
+
+
 
 
 
@@ -123,18 +204,6 @@ def callbackSensor(Dataset):
         # rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd.data[4]))
         # rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
 
-def toggleSolenoid(button):
-    pass
-    Sl = 0
-    if(button ==8): Sl = Solenoid1
-    elif(button ==9): Sl = Solenoid2
-    elif(button ==10): Sl = Solenoid3
-    elif(button ==11): Sl= Solenoid4
-    elif(button ==12): Sl = Solenoid5
-    elif(button ==13): Sl = Solenoid6
-    elif(button ==14): Sl = M1
-    elif(button ==15): Sl = M2
-    # CmdSolenoid(Sl,not(GPIO.input(Sl)))
 
     
 
@@ -145,8 +214,13 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    listener()  
-
+    try:
+        while not rospy.is_shutdown():
+            listener()
+            triggerCPG('trigger',trigger)
+    except rospy.ROSInterruptException:
+            cleanAndExit()
+        
   
     
 
