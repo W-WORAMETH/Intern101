@@ -123,6 +123,9 @@ def callbackCPG(CPG):
     FrontCPG = CPG.data[0]
     BackCPG = CPG.data[1]
 
+    print("FrontCPG = "+str(FrontCPG) )
+    print("BackCPG = "+str(BackCPG) )
+
     pass
 
 def sequenceRobotForward() :
@@ -130,8 +133,7 @@ def sequenceRobotForward() :
     global FrontCPG
     global BackCPG
     
-    print("FrontCPG = "+str(FrontCPG) )
-    print("BackCPG = "+str(BackCPG) )
+   
 
     if(FrontCPG <0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
