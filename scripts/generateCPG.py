@@ -87,6 +87,7 @@ def generateCPG() :
     outputH2 = math.tanh(activityH2)
 
     output.data = [outputH1, -outputH1]
+    rate.sleep()
     
     
   
@@ -120,7 +121,7 @@ def listener():
         sendData('CPG',output)
     if(trigger == False):
         sendData('CPG',output)
-    rospy.spin()
+    #rospy.spin()
   
 
 
