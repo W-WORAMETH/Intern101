@@ -136,23 +136,23 @@ def sequenceRobotForward() :
     
    
 
-    if(FrontCPG <0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
-    elif(FrontCPG > 0)  : FrontMagnetic = 1
-    elif(FrontCPG < 0)  : FrontMagnetic = 0
+    # if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
+    # elif(FrontCPG > 0)  : FrontMagnetic = 1
+    # elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
-    elif(BackCPG > 0)   : BackMagnetic = 1
-    elif(BackCPG < 0)   : BackMagnetic = 0
+    # if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
+    # elif(BackCPG > 0)   : BackMagnetic = 1
+    # elif(BackCPG < 0)   : BackMagnetic = 0
 
-    if(FrontCPG > 0.5)  : Solenoid = 1
-    elif(FrontCPG < -0.5) : Solenoid = 0
+    # if(FrontCPG > 0.5)  : Solenoid = 1
+    # elif(FrontCPG < -0.5) : Solenoid = 0
 
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
+    # if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
+    # if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
+    # if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
+    # if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
+    # if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
+    # if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
 
 
     # can seperated to another function if create more than one direction of seq 
