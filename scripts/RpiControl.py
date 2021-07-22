@@ -49,7 +49,7 @@ magneticBR = Channal6
 cmd = bool()
 trigger = bool()
 trigger = False
-
+Solenoid = 0
 #pin
 # GPIO.setmode(GPIO.BCM)
 # GPIO.setup(Channal1, GPIO.OUT)
@@ -127,10 +127,9 @@ def sequenceRobotForward() :
     elif(BackCPG > 0)   : BackMagnetic = 1
     elif(BackCPG < 0)   : BackMagnetic = 0
 
-    if(FrontCPG > 0.5)  : 
-        Solenoid = 1
-    elif(FrontCPG < -0.5) : 
-        Solenoid = 0
+    if(FrontCPG > 0.5)  : Solenoid = 1
+    elif(FrontCPG < -0.5) : Solenoid = 0
+
 
     # can seperated to another function if create more than one direction of seq 
     if(FrontMagnetic == 1) : 
