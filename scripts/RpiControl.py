@@ -99,7 +99,7 @@ def CmdChannal(Channal,cmd):
         GPIO.output(Channal,GPIO.HIGH)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     elif(cmd == 0):
-        GPIO.output(Solenoid,GPIO.LOW)
+        GPIO.output(Channal,GPIO.LOW)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
