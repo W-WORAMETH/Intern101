@@ -6,7 +6,7 @@ import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
-MI = 0.05
+MI = 0.2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -33,7 +33,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(10)
+rate = rospy.Rate(5)
 
 def restartCPG():
     global MI
