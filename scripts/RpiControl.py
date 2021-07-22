@@ -134,25 +134,25 @@ def sequenceRobotForward() :
     global FrontCPG
     global BackCPG
     
-   
-
-    if(FrontCPG < Float64(0.2) and FrontCPG > Float64(-0.2) )   : FrontMagnetic = 1
-    elif(FrontCPG > 0)  : FrontMagnetic = 1
-    elif(FrontCPG < 0)  : FrontMagnetic = 0
+    if(0.2-FrontCPG > 1e-5 and FrontCPG - (-0.2) > 1e-5) : FrontMagnetic = 1
+    elif(FrontCPG - 0 > 1e-5)  : FrontMagnetic = 1
+    #if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
+    # elif(FrontCPG > 0)  : FrontMagnetic = 1
+    # elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    if(BackCPG < Float64(0.2) and BackCPG > Float64(-0.2) )    : BackMagnetic = 1
-    elif(BackCPG > 0)   : BackMagnetic = 1
-    elif(BackCPG < 0)   : BackMagnetic = 0
+    # if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
+    # elif(BackCPG > 0)   : BackMagnetic = 1
+    # elif(BackCPG < 0)   : BackMagnetic = 0
 
-    if(FrontCPG > Float64(0.5) ) : Solenoid = 1
-    elif(FrontCPG < Float64(-0.5)): Solenoid = 0
+    # if(FrontCPG > 0.5)  : Solenoid = 1
+    # elif(FrontCPG < -0.5) : Solenoid = 0
 
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
+    # if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
+    # if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
+    # if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
+    # if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
+    # if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
+    # if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
 
 
     # can seperated to another function if create more than one direction of seq 
@@ -162,18 +162,18 @@ def sequenceRobotForward() :
     elif(FrontMagnetic == 0) : 
         CmdChannal(magneticFL,0)
         CmdChannal(magneticFR,0)
-    if(BackMagnetic == 1) : 
-        CmdChannal(magneticBL,1)
-        CmdChannal(magneticBR,1)
-    elif(BackMagnetic == 0) : 
-        CmdChannal(magneticBL,0)
-        CmdChannal(magneticBR,0)
-    if(Solenoid == 1):
-        CmdChannal(Solenoid1,1)
-        CmdChannal(Solenoid2,1)
-    elif(Solenoid == 0):
-        CmdChannal(Solenoid1,0)
-        CmdChannal(Solenoid2,0)
+    # if(BackMagnetic == 1) : 
+    #     CmdChannal(magneticBL,1)
+    #     CmdChannal(magneticBR,1)
+    # elif(BackMagnetic == 0) : 
+    #     CmdChannal(magneticBL,0)
+    #     CmdChannal(magneticBR,0)
+    # if(Solenoid == 1):
+    #     CmdChannal(Solenoid1,1)
+    #     CmdChannal(Solenoid2,1)
+    # elif(Solenoid == 0):
+    #     CmdChannal(Solenoid1,0)
+    #     CmdChannal(Solenoid2,0)
 
     #test up
 
