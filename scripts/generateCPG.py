@@ -33,7 +33,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(1000)
+rate = rospy.Rate(100)
 
 def restartCPG():
     global MI
@@ -113,15 +113,15 @@ def callbackJoy(Dataset):
 
     
 def listener():
+    global trigger
     rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)   
-     
     if(trigger == True):
         generateCPG()  #runnew cpg value
         sendData('CPG',output)
     if(trigger == False):
         sendData('CPG',output)
 
-    rospy.spin()
+    #rospy.spin()
   
 
 
