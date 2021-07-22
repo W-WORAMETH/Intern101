@@ -177,6 +177,7 @@ def callbackSensor(Dataset):
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
                 print("receive2")
+                global trigger
                 trigger = True
                 sequenceRobotForward()
 
