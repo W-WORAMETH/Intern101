@@ -78,12 +78,12 @@ def cleanAndExit():
     sys.exit()
 
 
-def triggerCPG(Topic,Massage):
-    global trigger
-    pub = rospy.Publisher(Topic,Bool,queue_size=10)
-    # rospy.loginfo(Massage)
-    pub.publish(Massage)
-    if(trigger == True): sequenceRobotForward()
+# def triggerCPG(Topic,Massage):
+#     global trigger
+#     pub = rospy.Publisher(Topic,Bool,queue_size=10)
+#     # rospy.loginfo(Massage)
+#     pub.publish(Massage)
+#     if(trigger == True): sequenceRobotForward()
 
 FrontCPG = float()
 BackCPG = float()
@@ -132,16 +132,23 @@ def sequenceRobotForward() :
     print("FrontCPG = "+str(FrontCPG) )
     print("BackCPG = "+str(BackCPG) )
 
-    if(FrontCPG == 0)   : FrontMagnetic = 1
+    if(FrontCPG <0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
     elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    if(BackCPG == 0)    : BackMagnetic = 1
+    if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
     elif(BackCPG > 0)   : BackMagnetic = 1
     elif(BackCPG < 0)   : BackMagnetic = 0
 
     if(FrontCPG > 0.5)  : Solenoid = 1
     elif(FrontCPG < -0.5) : Solenoid = 0
+
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
 
 
     # can seperated to another function if create more than one direction of seq 
@@ -164,9 +171,9 @@ def sequenceRobotForward() :
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
-    
+    #test up
 
-def callbackSensor(Dataset):
+def callbackJoy(Dataset):
     global trigger
 
     if (Dataset.data != OldDataset.data):
@@ -184,7 +191,6 @@ def callbackSensor(Dataset):
                 toggleChannal(button)
        
          
-
         if(Dataset.data[19] == 7):  #! must be edit
             print("receive1")
             button = Dataset.data[19]
@@ -225,10 +231,15 @@ def callbackSensor(Dataset):
     
 
 def listener():
-    global trigger
-    triggerCPG('trigger',trigger)
-    rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
-    rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
+    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
+    rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)
+    if(trigger == True):
+        sequenceRobotForward()
+    if(trigger == False):
+        pass
+
+
+
     # rospy.spin()
 
 if __name__ == '__main__':
