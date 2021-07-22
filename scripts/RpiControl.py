@@ -172,10 +172,10 @@ def callbackSensor(Dataset):
                 toggleChannal(button)
         OldDataset.data = Dataset.data    
          
-        if Dataset.data[19] == 1:  #! must be edit
+        if Dataset.data[19] == 7:  #! must be edit
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
-            if inputcmd == 333333: #! must be edit
+            if inputcmd == -32767: #! must be edit
                 trigger = True
                 sequenceRobotForward()
 
