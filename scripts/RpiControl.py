@@ -2,7 +2,7 @@
 #from scripts.RecieveSensor import Data
 import time
 import sys
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Int32MultiArray
 from std_msgs.msg import UInt16MultiArray
@@ -56,24 +56,24 @@ trigger = bool()
 trigger = False
 Solenoid = 0
 #pin
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(Channal1, GPIO.OUT)
-# GPIO.setup(Channal2, GPIO.OUT)
-# GPIO.setup(Channal3, GPIO.OUT)
-# GPIO.setup(Channal4, GPIO.OUT)
-# GPIO.setup(Channal5, GPIO.OUT)
-# GPIO.setup(Channal6, GPIO.OUT)
-# GPIO.setup(M1, GPIO.OUT)
-# GPIO.setup(M2, GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(Channal1, GPIO.OUT)
+GPIO.setup(Channal2, GPIO.OUT)
+GPIO.setup(Channal3, GPIO.OUT)
+GPIO.setup(Channal4, GPIO.OUT)
+GPIO.setup(Channal5, GPIO.OUT)
+GPIO.setup(Channal6, GPIO.OUT)
+GPIO.setup(M1, GPIO.OUT)
+GPIO.setup(M2, GPIO.OUT)
 
-# GPIO.output(Channal1,GPIO.HIGH)
-# GPIO.output(Channal2,GPIO.HIGH)
-# GPIO.output(Channal3,GPIO.HIGH)
-# GPIO.output(Channal4,GPIO.HIGH)
-# GPIO.output(Channal5,GPIO.HIGH)
-# GPIO.output(Channal6,GPIO.HIGH)
-# GPIO.output(M1,GPIO.LOW)
-# GPIO.output(M2,GPIO.LOW)
+GPIO.output(Channal1,GPIO.HIGH)
+GPIO.output(Channal2,GPIO.HIGH)
+GPIO.output(Channal3,GPIO.HIGH)
+GPIO.output(Channal4,GPIO.HIGH)
+GPIO.output(Channal5,GPIO.HIGH)
+GPIO.output(Channal6,GPIO.HIGH)
+GPIO.output(M1,GPIO.LOW)
+GPIO.output(M2,GPIO.LOW)
 
 def cleanAndExit():
     print("Cleaning...")
@@ -96,10 +96,10 @@ def CmdChannal(Channal,cmd):
     pass
     print("def Cmd")
     if(cmd == 1):
-        # GPIO.output(Channal,GPIO.HIGH)
+        GPIO.output(Channal,GPIO.HIGH)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     elif(cmd == 0):
-        # GPIO.output(Solenoid,GPIO.LOW)
+        GPIO.output(Solenoid,GPIO.LOW)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
@@ -116,7 +116,7 @@ def toggleChannal(button):
 
     elif(button ==14):  Sl = M1
     elif(button ==15):  Sl = M2
-    # CmdChannal(Sl,not(GPIO.input(Sl)))
+    CmdChannal(Sl,not(GPIO.input(Sl)))
 
 
 def callbackCPG(CPG):
