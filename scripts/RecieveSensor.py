@@ -10,7 +10,7 @@ sensor4 = 0
 
 Data = Int32MultiArray()
 Data.data = []
-rate = rospy.Rate(1)
+
 def callbackSensor(Data):
     sensor1 = Data.data[0]
     sensor2 = Data.data[1]

@@ -11,8 +11,8 @@ WeightH2_H2 = 1.4
 WeightH2_H1 = -(0.18 + MI) 
 activityH1 = 0
 activityH2 = 0
-outputH1 = 0.0
-outputH2 = 0.0
+outputH1 = 0.01
+outputH2 = 0.01
 
 Massage = Float64MultiArray()
 Massage.data = []
@@ -49,9 +49,7 @@ def generateCPG() :
     sendData('CPG',output)
     rate.sleep()
  
-    
-
-    
+  
 
 
 if __name__ == '__main__':
