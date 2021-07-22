@@ -107,11 +107,13 @@ def callbackJoy(Dataset):
                 print("receive3")
                 trigger = False
 
-        if(trigger == True):
-            generateCPG()  #runnew cpg value
-            sendData('CPG',output)
-        if(trigger == False):
-            sendData('CPG',output)
+        Dataset.data = OldDataset.data
+
+    if(trigger == True):
+        generateCPG()  #runnew cpg value
+        sendData('CPG',output)
+    if(trigger == False):
+        sendData('CPG',output)
 
 
     
