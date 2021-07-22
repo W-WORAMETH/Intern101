@@ -25,7 +25,7 @@ BiasH1 = 0.0
 BiasH2 = 0.0
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(1)
+rate = rospy.Rate(100)
 
 def restartCPG():
     global MI
@@ -80,8 +80,8 @@ def generateCPG() :
 
     output.data = [outputH1, -outputH1]
     sendData('CPG',output)
-    time.sleep(1)
-    # rate.sleep()
+    
+    rate.sleep()
 
 def triggerCPG(trigger) :
 
