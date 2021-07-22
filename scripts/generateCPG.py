@@ -79,7 +79,7 @@ def generateCPG() :
 
     output.data = [outputH1, -outputH1]
     sendData('CPG',output)
-    rate.sleep()
+    # rate.sleep()
 
 def triggerCPG(trigger) :
 
@@ -95,7 +95,7 @@ def triggerCPG(trigger) :
 
 def listener():
     rospy.Subscriber('trigger', Bool, triggerCPG)  
-    #rospy.spin()
+    rospy.spin()
   
 
 
