@@ -82,6 +82,7 @@ def triggerCPG(Topic,Massage):
     pub = rospy.Publisher(Topic,Bool,queue_size=10)
     #rospy.loginfo(Massage)
     pub.publish(Massage)
+    if(trigger == True): sequenceRobotForward()
 
 FrontCPG = float()
 BackCPG = float()
@@ -183,7 +184,6 @@ def callbackSensor(Dataset):
         if inputcmd == -32767: #! must be edit
             print("receive2")   
             trigger = True
-            sequenceRobotForward()
         elif inputcmd == 0: #! must be edit
             print("receive3")
             trigger = False
