@@ -81,7 +81,7 @@ def cleanAndExit():
 def triggerCPG(Topic,Massage):
     global trigger
     pub = rospy.Publisher(Topic,Bool,queue_size=10)
-    rospy.loginfo(Massage)
+    # rospy.loginfo(Massage)
     pub.publish(Massage)
     if(trigger == True): sequenceRobotForward()
 
