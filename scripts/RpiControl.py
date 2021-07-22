@@ -211,7 +211,7 @@ def callbackSensor(Dataset):
 def listener():
     triggerCPG('trigger',trigger)
     #rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
-    rospy.Subscriber('CPG',Float32MultiArray, callbackCPG)       
+    #rospy.Subscriber('CPG',Float32MultiArray, callbackCPG)       
     rospy.spin()
 
 if __name__ == '__main__':
