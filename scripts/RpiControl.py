@@ -141,7 +141,7 @@ def sequenceRobotForward() :
     elif(FrontCPG > 0)  : FrontMagnetic = 1
     elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    if(BackCPG <0.25 and BackCPG > -0.255 )    : BackMagnetic = 1
+    if(BackCPG <0.25 and BackCPG > -0.25 )    : BackMagnetic = 1
     elif(BackCPG > 0)   : BackMagnetic = 1
     elif(BackCPG < 0)   : BackMagnetic = 0
 
@@ -243,6 +243,7 @@ def listener():
     if(trigger == True):
         sequenceRobotForward()
     elif(trigger == False):
+        #ควรหยุด ปล่อยลมโซลินอยเเละเเม่เหล็ก
         pass
     rate.sleep()
     #rospy.spin()
