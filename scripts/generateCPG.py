@@ -28,7 +28,7 @@ trigger = Bool()
 trigger = False
 
 Dataset = Int16MultiArray()
-Dataset.data = []
+Dataset.data = [0,0]
 OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
