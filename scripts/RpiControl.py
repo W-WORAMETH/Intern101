@@ -17,6 +17,7 @@ import numpy as np
 
 
 rospy.init_node('RpiControl', anonymous=True)
+
 rate = rospy.Rate(10) # 1hz
 
 Dataset = Int16MultiArray()
@@ -201,7 +202,7 @@ def callbackJoy(Dataset):
             print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
-            print(Dataset.da)
+            print(Dataset.data[button])
             if inputcmd == -32767: #! must be edit
                 print("receive2")   
                 trigger = True
