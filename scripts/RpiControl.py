@@ -126,8 +126,8 @@ def callbackCPG(CPG):
     FrontCPG = float(CPG.data[0])
     BackCPG = float(CPG.data[1])
 
-    print("FrontCPG = "+str(FrontCPG) )
-    print("BackCPG = "+str(BackCPG) )
+    # print("FrontCPG = "+str(FrontCPG) )
+    # print("BackCPG = "+str(BackCPG) )
 
 def sequenceRobotForward() :
     global Solenoid
@@ -244,7 +244,7 @@ def listener():
     elif(trigger == False):
         pass
     print("end")
-    time.sleep(1)
+    rate.sleep()
     #rospy.spin()
 
 if __name__ == '__main__':
