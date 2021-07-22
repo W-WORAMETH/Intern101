@@ -244,7 +244,7 @@ def listener():
     elif(trigger == False):
         pass
     print("end")
-    time.sleep()
+    time.sleep(1)
     #rospy.spin()
 
 if __name__ == '__main__':
