@@ -134,7 +134,8 @@ def sequenceRobotForward() :
     global FrontCPG
     global BackCPG
     
-   
+    print("FrontCPG = "+str(FrontCPG) )
+    print("BackCPG = "+str(BackCPG) )
 
     if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
