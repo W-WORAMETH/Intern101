@@ -4,7 +4,7 @@ import sys
 import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Bool
-MI = 0.055   
+MI = 0.02  
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -39,7 +39,7 @@ def restartCPG():
     global outputH2
 
 
-    MI = 0.05
+    MI = 0.02
     WeightH1_H1 = 1.4
     WeightH1_H2 = 0.18 + MI
     WeightH2_H2 = 1.4
