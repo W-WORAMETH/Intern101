@@ -155,7 +155,7 @@ def sequenceRobotForward() :
     
 
 def callbackSensor(Dataset):
-
+    global trigger
 
     if (Dataset.data != OldDataset.data):
         #debouce and do one time when press
@@ -178,12 +178,12 @@ def callbackSensor(Dataset):
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
                 print("receive2")
-                global trigger
+                
                 trigger = True
                 sequenceRobotForward()
             elif inputcmd == 0: #! must be edit
                 print("receive2")
-                global trigger
+                
                 trigger = False
         
         OldDataset.data = Dataset.data    
