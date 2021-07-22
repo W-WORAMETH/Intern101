@@ -59,7 +59,6 @@ def triggerCPG(trigger) :
 
 
 def listener():
-    rospy.init_node('RecieveSensor', anonymous=True)
     rospy.Subscriber('trigger', Bool, triggerCPG)    
     rospy.spin()
   
