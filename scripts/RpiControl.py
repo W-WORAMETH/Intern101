@@ -117,6 +117,9 @@ def toggleChannal(button):
 def callbackCPG(CPG):
     FrontCPG = CPG.data[0]
     BackCPG = CPG.data[1]
+
+    print("FrontCPG = "+str(FrontCPG) )
+    print("BackCPG = "+str(BackCPG) )
     pass
 
 def sequenceRobotForward() :
