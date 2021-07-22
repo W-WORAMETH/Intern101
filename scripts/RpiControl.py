@@ -18,7 +18,7 @@ import numpy as np
 
 rospy.init_node('RpiControl', anonymous=True)
 
-rate = rospy.Rate(100) # 1hz
+rate = rospy.Rate(10) # 1hz
 
 Dataset = Int16MultiArray()
 Dataset.data = []
