@@ -60,8 +60,17 @@ def sendData(Topic,Massage):
     pub.publish(Massage)
 
 def generateCPG() :
+    global MI
+    global WeightH1_H1
+    global WeightH1_H2
+    global WeightH2_H2
+    global WeightH2_H1
+    global activityH1 
+    global activityH2
+    global activityH2
     global outputH1
     global outputH2
+
     activityH1 = WeightH1_H1 * outputH1 + WeightH1_H2 * outputH2 + BiasH1
     activityH2 = WeightH2_H2 * outputH2 + WeightH2_H1 * outputH1 + BiasH2
 
@@ -73,6 +82,7 @@ def generateCPG() :
     rate.sleep()
 
 def triggerCPG(trigger) :
+
     print(trigger.data)
     if(trigger.data == True):
         generateCPG()
@@ -84,7 +94,7 @@ def triggerCPG(trigger) :
 
 
 def listener():
-    rospy.Subscriber('trigger', Bool, triggerCPG)    
+    rospy.Subscriber('trigger', Bool, triggerCPG)  
     rospy.spin()
   
 
