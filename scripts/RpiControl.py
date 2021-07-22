@@ -241,8 +241,10 @@ def listener():
     rospy.Subscriber('CPG',Float64MultiArray,callbackCPG)
     if(trigger == True):
         sequenceRobotForward()
-    if(trigger == False):
+    elif(trigger == False):
         pass
+    print("end")
+    time.sleep()
     #rospy.spin()
 
 if __name__ == '__main__':
