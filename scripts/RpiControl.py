@@ -6,6 +6,7 @@ import sys
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import UInt16MultiArray
 from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import UInt8
 from std_msgs.msg import Bool
 import rospy
@@ -180,7 +181,11 @@ def callbackSensor(Dataset):
                 global trigger
                 trigger = True
                 sequenceRobotForward()
-
+            elif inputcmd == 0: #! must be edit
+                print("receive2")
+                global trigger
+                trigger = False
+        
         OldDataset.data = Dataset.data    
 
 
@@ -212,7 +217,7 @@ def callbackSensor(Dataset):
 def listener():
     triggerCPG('trigger',trigger)
     rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
-    rospy.Subscriber('CPG',Float32MultiArray, callbackCPG)       
+    rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
     #rospy.spin()
 
 if __name__ == '__main__':
