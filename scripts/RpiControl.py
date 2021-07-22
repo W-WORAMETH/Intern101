@@ -80,7 +80,7 @@ def cleanAndExit():
 
 def triggerCPG(Topic,Massage):
     pub = rospy.Publisher(Topic,Bool,queue_size=10)
-    rospy.loginfo(Massage)
+    #rospy.loginfo(Massage)
     pub.publish(Massage)
 
 FrontCPG = float()
@@ -170,9 +170,9 @@ def callbackSensor(Dataset):
             if inputcmd == 1 :  #rising adge occure
                 print("prp toggle")
                 toggleChannal(button)
-        
+        OldDataset.data = Dataset.data    
          
-        if(Dataset.data[19] == 7):  #! must be edit
+    if(Dataset.data[19] == 7):  #! must be edit
             print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
@@ -186,8 +186,8 @@ def callbackSensor(Dataset):
                 
                 trigger = False
         
-        OldDataset.data = Dataset.data    
-
+       
+    
 
 
             
