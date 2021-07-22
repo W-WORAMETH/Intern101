@@ -4,6 +4,7 @@ import sys
 import time
 import rospy
 from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
 MI = 0.5
 WeightH1_H1 = 1.4
@@ -14,6 +15,9 @@ activityH1 = 0
 activityH2 = 0
 outputH1 = 0.01
 outputH2 = 0.01
+BiasH1 = 0.0
+BiasH2 = 0.0
+
 
 Massage = Float64MultiArray()
 Massage.data = []
@@ -21,8 +25,11 @@ Massage.data = []
 output = Float64MultiArray()
 output.data = []
 
-BiasH1 = 0.0
-BiasH2 = 0.0
+
+Dataset = Int16MultiArray()
+Dataset.data = []
+OldDataset = Int16MultiArray()
+OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
 rate = rospy.Rate(1000)
@@ -79,24 +86,35 @@ def generateCPG() :
     outputH2 = math.tanh(activityH2)
 
     output.data = [outputH1, -outputH1]
-    sendData('CPG',output)
+    
     
     # rate.sleep()
 
-def triggerCPG(trigger) :
+def callbackJoy(Dataset):
+    pass
+    if (Dataset.data != OldDataset.data):
+        
+        if(Dataset.data[19] == 7):  #! must be edit
+            print("receive1")
+            button = Dataset.data[19]
+            inputcmd = Dataset.data[button]
+            if inputcmd == -32767: #! must be edit
+                print("receive2")   
+                trigger = True
+            elif inputcmd == 0: #! must be edit
+                print("receive3")
+                trigger = False
 
-    print(trigger.data)
-    if(trigger.data == True):
-        generateCPG()
-    else :
-        print("waiting for command ... ")
-        # restartCPG()
-        pass
+        if(trigger == True):
+            generateCPG()  #runnew cpg value
+            sendData('CPG',output)
+        if(trigger == False):
+            sendData('CPG',output)
 
 
-
+    
 def listener():
-    rospy.Subscriber('trigger', Bool, triggerCPG)  
+    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)  
     rospy.spin()
   
 
