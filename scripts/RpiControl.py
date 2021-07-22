@@ -22,7 +22,8 @@ Dataset.data = []
 OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
-
+CPG = Float64MultiArray()
+CPG =[0,0]
 
 Channal1 = 4
 Channal2 = 17
@@ -234,7 +235,7 @@ def callbackJoy(Dataset):
 
 def listener():
     rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
-    rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)
+    rospy.Subscriber('CPG',Float64MultiArray,callbackCPG)
     if(trigger == True):
         sequenceRobotForward()
     if(trigger == False):
