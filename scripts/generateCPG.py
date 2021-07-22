@@ -24,7 +24,8 @@ Massage.data = []
 
 output = Float64MultiArray()
 output.data = []
-
+trigger = Bool()
+trigger = False
 
 Dataset = Int16MultiArray()
 Dataset.data = []
@@ -92,6 +93,7 @@ def generateCPG() :
 
 def callbackJoy(Dataset):
     pass
+    global trigger
     if (Dataset.data != OldDataset.data):
         
         if(Dataset.data[19] == 7):  #! must be edit
