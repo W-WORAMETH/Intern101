@@ -13,8 +13,8 @@ WeightH2_H2 = 1.4
 WeightH2_H1 = -(0.18 + MI) 
 activityH1 = 0
 activityH2 = 0
-outputH1 = 0.01
-outputH2 = 0.01
+outputH1 = 0.0001
+outputH2 = 0.0001
 BiasH1 = 0.0
 BiasH2 = 0.0
 
@@ -33,7 +33,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(10)
+rate = rospy.Rate(1)
 
 def restartCPG():
     global MI
