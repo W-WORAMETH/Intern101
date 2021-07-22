@@ -95,7 +95,7 @@ def triggerCPG(trigger) :
 
 def listener():
     rospy.Subscriber('trigger', Bool, triggerCPG)  
-    rospy.spin()
+    #rospy.spin()
   
 
 
