@@ -115,15 +115,22 @@ def toggleChannal(button):
 
 
 def callbackCPG(CPG):
+    global FrontCPG
+    global BackCPG
+
     FrontCPG = CPG.data[0]
     BackCPG = CPG.data[1]
 
-    print("FrontCPG = "+str(FrontCPG) )
-    print("BackCPG = "+str(BackCPG) )
     pass
 
 def sequenceRobotForward() :
     global Solenoid
+    global FrontCPG
+    global BackCPG
+    
+    print("FrontCPG = "+str(FrontCPG) )
+    print("BackCPG = "+str(BackCPG) )
+    
     if(FrontCPG == 0)   : FrontMagnetic = 1
     elif(FrontCPG > 0)  : FrontMagnetic = 1
     elif(FrontCPG < 0)  : FrontMagnetic = 0
@@ -219,7 +226,7 @@ def callbackSensor(Dataset):
 def listener():
     triggerCPG('trigger',trigger)
     rospy.Subscriber('joyStick',Int16MultiArray, callbackSensor) 
-    #rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
+    rospy.Subscriber('CPG',Float64MultiArray, callbackCPG)       
     # rospy.spin()
 
 if __name__ == '__main__':
