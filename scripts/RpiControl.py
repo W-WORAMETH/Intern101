@@ -200,6 +200,7 @@ def callbackJoy(Dataset):
             print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
+            print(inputcmd)
             if inputcmd == -32767: #! must be edit
                 print("receive2")   
                 trigger = True
