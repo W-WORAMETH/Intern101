@@ -89,7 +89,7 @@ def generateCPG() :
     output.data = [outputH1, -outputH1]
     
     
-    # rate.sleep()
+    rate.sleep()
 
 def callbackJoy(Dataset):
     pass
