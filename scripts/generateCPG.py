@@ -23,12 +23,12 @@ Massage = Float64MultiArray()
 Massage.data = []
 
 output = Float64MultiArray()
-output.data = []
+output.data = [0,0]
 trigger = Bool()
 trigger = False
 
 Dataset = Int16MultiArray()
-Dataset.data = [0,0]
+Dataset.data = []
 OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
