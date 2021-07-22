@@ -5,7 +5,7 @@ import time
 import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Bool
-MI = 2
+MI = 0.5
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -25,7 +25,7 @@ BiasH1 = 0.0
 BiasH2 = 0.0
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(10)
+rate = rospy.Rate(1000)
 
 def restartCPG():
     global MI
@@ -40,7 +40,7 @@ def restartCPG():
     global outputH2
 
 
-    MI = 1
+    MI = 0.55
     WeightH1_H1 = 1.4
     WeightH1_H2 = 0.18 + MI
 
