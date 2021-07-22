@@ -23,7 +23,8 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
 CPG = Float64MultiArray()
-CPG =[0,0]
+FrontCPG = 0.0
+BackCPG = 0.0
 
 Channal1 = 4
 Channal2 = 17
