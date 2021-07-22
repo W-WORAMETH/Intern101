@@ -120,8 +120,6 @@ def callbackCPG(CPG):
     global FrontCPG
     global BackCPG
 
-    print("callback")
-
     FrontCPG = CPG.data[0]
     BackCPG = CPG.data[1]
 
