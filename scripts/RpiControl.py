@@ -152,7 +152,7 @@ def sequenceRobotForward() :
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
     if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP3")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP6")
 
 
     # can seperated to another function if create more than one direction of seq 
