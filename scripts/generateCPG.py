@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
 #MI = 0.2  #best MI = 0.2
-MI = 0.4
+MI = 0.2
 WeightH1_H1 = 1.4
 WeightH1_H2 = 0.18 + MI
 WeightH2_H2 = 1.4
@@ -35,6 +35,8 @@ OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
 rate = rospy.Rate(5)
+
+#test 1
 
 def restartCPG():
     global MI
@@ -124,7 +126,7 @@ def listener():
         sendData('CPG',output)
     #rospy.spin()
   
-
+#fffffffff
 
 if __name__ == '__main__':
     try:
