@@ -98,6 +98,7 @@ def generateCPG() :
 def callbackJoy(Dataset):
     pass
     global trigger
+    global MI
     if (Dataset.data != OldDataset.data):
         
         if(Dataset.data[19] == 7):  #! must be edit
@@ -113,6 +114,12 @@ def callbackJoy(Dataset):
                 print("no cmd receive")
                 trigger = False
 
+        elif(Dataset.data[19]==2): 
+            button = Dataset.data[19]
+            inputcmd = Dataset.data[button]  
+            if inputcmd == 32767 :  
+                MI = MI-0.05
+                print("[Decrease MI] MI = ",MI)
         Dataset.data = OldDataset.data
 
 #test1  
