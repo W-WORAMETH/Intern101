@@ -18,7 +18,7 @@ import numpy as np
 
 rospy.init_node('RpiControl', anonymous=True)
 
-rate = rospy.Rate(10) # 1hz
+rate = rospy.Rate(100) # 10hz
 
 Dataset = Int16MultiArray()
 Dataset.data = []
@@ -238,7 +238,8 @@ def callbackJoy(Dataset):
             if inputcmd == 1 :  #rising adge occure
                 print("command toggle")
                 toggleChannal(button)
-         
+
+     
      
          
         elif(Dataset.data[19] == 7):  #! must be edit

@@ -34,7 +34,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(5)
+rate = rospy.Rate(100) #5
 
 #test 1
 
@@ -50,16 +50,14 @@ def restartCPG():
     global outputH1
     global outputH2
 
-
-    MI = 0.55
     WeightH1_H1 = 1.4
     WeightH1_H2 = 0.18 + MI
 
     WeightH2_H1 = -(0.18 + MI) 
     activityH1 = 0
     activityH2 = 0
-    outputH1 = 0.00001
-    outputH2 = 0.00001
+    outputH1 = 0.1
+    outputH2 = 0.1
 
 def cleanAndExit():
     print("Cleaning...")    
@@ -68,7 +66,7 @@ def cleanAndExit():
 
 def sendData(Topic,Massage):
     pub = rospy.Publisher(Topic,Float64MultiArray,queue_size=10)
-    rospy.loginfo(Massage)
+    #rospy.loginfo(Massage)
     pub.publish(Massage)
 
 def generateCPG() :
@@ -114,12 +112,25 @@ def callbackJoy(Dataset):
                 print("no cmd receive")
                 trigger = False
 
-        elif(Dataset.data[19]==2): 
+        if(Dataset.data[19]== 18 ):  #digital input
             button = Dataset.data[19]
-            inputcmd = Dataset.data[button]  
-            if inputcmd == 32767 :  
-                MI = MI-0.05
-                print("[Decrease MI] MI = ",MI)
+            state = Dataset.data[button] - OldDataset.data[button]  
+            inputcmd = state   #use state because want rising adge
+            if inputcmd == 1 :  #rising adge occure
+                MI = MI+0.01
+                print("[ Increase MI ] : MI = ", MI)
+                restartCPG()
+        
+        if(Dataset.data[19]== 17 ):  #digital input
+
+            button = Dataset.data[19]
+            state = Dataset.data[button] - OldDataset.data[button]  
+            inputcmd = state   #use state because want rising adge
+            if inputcmd == 1 :  #rising adge occure
+                MI = MI-0.01
+                print("[ Decrease MI ] : MI = ", MI)
+                restartCPG()
+               
         Dataset.data = OldDataset.data
 
 #test1  
@@ -135,7 +146,7 @@ def listener():
         sendData('CPG',output)
     #rospy.spin()
   
-#fffffffff
+
 
 if __name__ == '__main__':
     try:
