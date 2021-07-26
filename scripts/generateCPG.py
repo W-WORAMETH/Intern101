@@ -29,12 +29,16 @@ trigger = Bool()
 trigger = False
 
 Dataset = Int16MultiArray()
-Dataset.data = []
+Dataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+Input_Dataset = Int16MultiArray()
+Input_Dataset.data = []
+
 OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(5) #5
+rate = rospy.Rate(10) #5
 
 #test 1
 
@@ -88,15 +92,27 @@ def generateCPG() :
     outputH2 = math.tanh(activityH2)
 
     output.data = [outputH1, -outputH1]
-    time.sleep(0.01)
+    rate.sleep()
     
     
   
 
-def callbackJoy(Dataset):
-    pass
+def callbackJoy(Input_Dataset):
+    global Dataset
+    Dataset.data = Input_Dataset.data
+   
+
+#test1  
+
+    
+def listener():
     global trigger
+    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)   
+
+    
+    global Dataset
     global MI
+    
     if (Dataset.data != OldDataset.data):
         
         if(Dataset.data[19] == 7):  #! must be edit
@@ -131,20 +147,17 @@ def callbackJoy(Dataset):
                 print("[ Decrease MI ] : MI = ", MI)
                 restartCPG()
                
-        Dataset.data = OldDataset.data
+        Dataset.data = OldDataset.data    
+    #rospy.spin()
 
-#test1  
-
-    
-def listener():
-    global trigger
-    rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy)   
     if(trigger == True):
         generateCPG()  #runnew cpg value
         sendData('CPG',output)
     if(trigger == False):
         sendData('CPG',output)
-    #rospy.spin()
+        rate.sleep()
+
+
 
 
 

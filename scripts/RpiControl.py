@@ -144,8 +144,8 @@ def sequenceRobotForward() :
     elif(BackCPG > 0)   : BackMagnetic = 1
     elif(BackCPG < 0)   : BackMagnetic = 0
 
-    if(FrontCPG > 0.5)  : Solenoid = 1
-    elif(FrontCPG < -0.5) : Solenoid = 0
+    if(FrontCPG > 0.4)  : Solenoid = 1
+    elif(FrontCPG < -0.4) : Solenoid = 0
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ front STEP1")
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ front STEP2")
