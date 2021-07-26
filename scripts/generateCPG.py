@@ -34,7 +34,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 rospy.init_node('generateCPG', anonymous=True)
-rate = rospy.Rate(100) #5
+rate = rospy.Rate(5) #5
 
 #test 1
 
@@ -88,7 +88,7 @@ def generateCPG() :
     outputH2 = math.tanh(activityH2)
 
     output.data = [outputH1, -outputH1]
-    rate.sleep()
+    time.sleep(0.01)
     
     
   
@@ -145,15 +145,17 @@ def listener():
     if(trigger == False):
         sendData('CPG',output)
     #rospy.spin()
-  
+
 
 
 if __name__ == '__main__':
     try:
         while not rospy.is_shutdown():
             listener()
+            
     except rospy.ROSInterruptException:
             cleanAndExit()
+    
         
 
 

@@ -18,7 +18,7 @@ import numpy as np
 
 rospy.init_node('RpiControl', anonymous=True)
 
-rate = rospy.Rate(100) # 10hz
+rate = rospy.Rate(10) # 10hz
 
 Dataset = Int16MultiArray()
 Dataset.data = []
@@ -293,7 +293,7 @@ def listener():
         if Direction == 1 : sequenceRobotForward()
         elif Direction == 2 : sequenceRobotBackward()
     elif(trigger == False):
-        #ควรหยุด ปล่อยลมโซลินอยเเละเเม่เหล็ก
+        #ควรหยุด ปล่อยลม โซลินอยเเละเเม่เหล็ก
 
         pass
     rate.sleep()
