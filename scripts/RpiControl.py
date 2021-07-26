@@ -201,6 +201,25 @@ def sequenceRobotBackward():
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ Back STEP5")
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ Back STEP6")
 
+    if(FrontMagnetic == 1) : 
+        CmdChannal(magneticFL,1)
+        CmdChannal(magneticFR,1)
+    elif(FrontMagnetic == 0) : 
+        CmdChannal(magneticFL,0)
+        CmdChannal(magneticFR,0)
+    if(BackMagnetic == 1) : 
+        CmdChannal(magneticBL,1)
+        CmdChannal(magneticBR,1)
+    elif(BackMagnetic == 0) : 
+        CmdChannal(magneticBL,0)
+        CmdChannal(magneticBR,0)
+    if(Solenoid == 1):
+        CmdChannal(Solenoid1,1)
+        CmdChannal(Solenoid2,1)
+    elif(Solenoid == 0):
+        CmdChannal(Solenoid1,0)
+        CmdChannal(Solenoid2,0)
+
 
 def callbackJoy(Dataset):
     global trigger
