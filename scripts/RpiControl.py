@@ -54,6 +54,7 @@ magneticBR = Channal6
 cmd = bool()
 trigger = bool()
 trigger = False
+Direction = 0
 Solenoid = 0
 #pin
 GPIO.setmode(GPIO.BCM)
@@ -126,8 +127,6 @@ def callbackCPG(CPG):
     FrontCPG = float(CPG.data[0])
     BackCPG = float(CPG.data[1])
 
-    # print("FrontCPG = "+str(FrontCPG) )
-    # print("BackCPG = "+str(BackCPG) )
 
 def sequenceRobotForward() :
     global Solenoid
@@ -148,12 +147,12 @@ def sequenceRobotForward() :
     if(FrontCPG > 0.5)  : Solenoid = 1
     elif(FrontCPG < -0.5) : Solenoid = 0
 
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP1")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ STEP2")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ STEP3")
-    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP4")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ STEP5")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ STEP6")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ front STEP1")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ front STEP2")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ front STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ front STEP4")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ front STEP5")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ front STEP6")
 
 
     # can seperated to another function if create more than one direction of seq 
@@ -176,10 +175,36 @@ def sequenceRobotForward() :
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
-    #test up
+def sequenceRobotBackward():
+    global Solenoid
+    global FrontCPG
+    global BackCPG
+    
+    print("FrontCPG = "+str(FrontCPG) )
+    print("BackCPG = "+str(BackCPG) )
+
+    if(FrontCPG < 0.25 and FrontCPG > -0.25 )   : FrontMagnetic = 1
+    elif(FrontCPG > 0)  : FrontMagnetic = 0
+    elif(FrontCPG < 0)  : FrontMagnetic = 1
+    
+    if(BackCPG <0.25 and BackCPG > -0.25 )    : BackMagnetic = 1
+    elif(BackCPG > 0)   : BackMagnetic = 0
+    elif(BackCPG < 0)   : BackMagnetic = 1
+
+    if(FrontCPG > 0.5)  : Solenoid = 1
+    elif(FrontCPG < -0.5) : Solenoid = 0
+
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP1")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP2")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP4")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ Back STEP5")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ Back STEP6")
+
 
 def callbackJoy(Dataset):
     global trigger
+    global Direction
 
     if (Dataset.data != OldDataset.data):
         #debouce and do one time when press
@@ -192,22 +217,25 @@ def callbackJoy(Dataset):
             state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd == 1 :  #rising adge occure
-                print("prp toggle")
+                print("command toggle")
                 toggleChannal(button)
          
      
          
         elif(Dataset.data[19] == 7):  #! must be edit
-            print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             print(Dataset.data[button])
-            if(inputcmd == -32767): #! must be edit
-                print("receive2")   
+            if(inputcmd == -32767): #! must be edit  
                 trigger = True
+                Direction = 1 #forward
+            if(inputcmd == 32767): #! must be edit  
+                trigger = True
+                Direction = 2 #Backward
+
             elif(inputcmd == 0): #! must be edit
-                print("receive3")
                 trigger = False
+                Direction = 0
                 
         OldDataset.data = Dataset.data   
 
@@ -238,12 +266,22 @@ def callbackJoy(Dataset):
 
 def listener():
     global trigger
+    global Direction
     rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
     rospy.Subscriber('CPG',Float64MultiArray,callbackCPG)
     if(trigger == True):
-        sequenceRobotForward()
+        if Direction == 1 : sequenceRobotForward()
+        elif Direction == 2 : sequenceRobotBackward()
     elif(trigger == False):
         #ควรหยุด ปล่อยลมโซลินอยเเละเเม่เหล็ก
+        GPIO.output(Channal1,GPIO.HIGH)
+        GPIO.output(Channal2,GPIO.HIGH)
+        GPIO.output(Channal3,GPIO.HIGH)
+        GPIO.output(Channal4,GPIO.HIGH)
+        GPIO.output(Channal5,GPIO.HIGH)
+        GPIO.output(Channal6,GPIO.HIGH)
+        GPIO.output(M1,GPIO.LOW)
+        GPIO.output(M2,GPIO.LOW)
         pass
     rate.sleep()
     #rospy.spin()
