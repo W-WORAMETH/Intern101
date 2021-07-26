@@ -101,14 +101,16 @@ def callbackJoy(Dataset):
     if (Dataset.data != OldDataset.data):
         
         if(Dataset.data[19] == 7):  #! must be edit
-            print("receive1")
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
-                print("receive2")   
+                print("receive FW")   
+                trigger = True
+            elif inputcmd == 32767: #! must be edit
+                print("receive BW")   
                 trigger = True
             elif inputcmd == 0: #! must be edit
-                print("receive3")
+                print("no cmd receive")
                 trigger = False
 
         Dataset.data = OldDataset.data
