@@ -274,14 +274,7 @@ def listener():
         elif Direction == 2 : sequenceRobotBackward()
     elif(trigger == False):
         #ควรหยุด ปล่อยลมโซลินอยเเละเเม่เหล็ก
-        GPIO.output(Channal1,GPIO.HIGH)
-        GPIO.output(Channal2,GPIO.HIGH)
-        GPIO.output(Channal3,GPIO.HIGH)
-        GPIO.output(Channal4,GPIO.HIGH)
-        GPIO.output(Channal5,GPIO.HIGH)
-        GPIO.output(Channal6,GPIO.HIGH)
-        GPIO.output(M1,GPIO.LOW)
-        GPIO.output(M2,GPIO.LOW)
+
         pass
     rate.sleep()
     #rospy.spin()
