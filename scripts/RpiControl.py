@@ -90,8 +90,8 @@ def cleanAndExit():
 #     pub.publish(Massage)
 #     if(trigger == True): sequenceRobotForward()
 
-FrontCPG =0.0
-BackCPG =0.0
+CPG1 = 0.0
+CPG2 = 0.0
 
 def CmdChannal(Channal,cmd):
     pass
@@ -121,35 +121,35 @@ def toggleChannal(button):
 
 
 def callbackCPG(CPG):
-    global FrontCPG
-    global BackCPG
+    global CPG1
+    global CPG2
 
-    FrontCPG = float(CPG.data[0])
-    BackCPG = float(CPG.data[1])
+    CPG1 = float(CPG.data[0])
+    CPG2 = float(CPG.data[1])
 
 
 def sequenceRobotForward() :
     global Solenoid
-    global FrontCPG
-    global BackCPG
+    global CPG1
+    global CPG2
     
-    print("FrontCPG = "+str(FrontCPG) )
-    print("BackCPG = "+str(BackCPG) )
+    print("FrontCPG = "+str(CPG1) )
+    print("BackCPG = "+str(CPG2) )
     
-    if FrontCPG <0.25 and FrontCPG > -0.25:
+    if CPG1 <= 0.25 and CPG1 >= -0.25:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif FrontCPG > 0 :
+    elif CPG1 > 0.25 :
         FrontMagnetic = 1
         BackMagnetic = 0
-    elif FrontCPG < 0 :
+    elif CPG1 < -0.255 :
         FrontMagnetic = 0
         BackMagnetic = 1
    
-    if BackCPG > 0 :
-        Solenoid = 0
-    elif BackCPG <= 0 :
+    if CPG2 > 0 :
         Solenoid = 1
+    elif CPG2 <= 0 :
+        Solenoid = 0
 
 
     # if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
@@ -193,22 +193,37 @@ def sequenceRobotForward() :
 
 def sequenceRobotBackward():
     global Solenoid
-    global FrontCPG
-    global BackCPG
+    global CPG1
+    global CPG2
     
-    print("FrontCPG = "+str(FrontCPG) )
-    print("BackCPG = "+str(BackCPG) )
+    print("FrontCPG = "+str(CPG1) )
+    print("BackCPG = "+str(CPG2) )
 
-    if(FrontCPG < 0.25 and FrontCPG > -0.25 )   : FrontMagnetic = 1
-    elif(FrontCPG > 0)  : FrontMagnetic = 0
-    elif(FrontCPG < 0)  : FrontMagnetic = 1
+    if CPG1 <0.25 and CPG1 > -0.25:
+        FrontMagnetic = 1
+        BackMagnetic = 1
+    elif CPG1 > 0 :
+        FrontMagnetic = 1
+        BackMagnetic = 0 
+    elif CPG1 < 0 :
+        FrontMagnetic = 0
+        BackMagnetic = 1
+   
+    if CPG2 > 0 :
+        Solenoid = 0
+    elif CPG2 <= 0 :
+        Solenoid = 1
+
+    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    # elif(CPG1 > 0)  : FrontMagnetic = 0
+    # elif(CPG1 < 0)  : FrontMagnetic = 1
     
-    if(BackCPG <0.25 and BackCPG > -0.25 )    : BackMagnetic = 1
-    elif(BackCPG > 0)   : BackMagnetic = 0
-    elif(BackCPG < 0)   : BackMagnetic = 1
+    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    # elif(CPG2 > 0)   : BackMagnetic = 0
+    # elif(CPG2 < 0)   : BackMagnetic = 1
 
-    if(FrontCPG > 0.5)  : Solenoid = 1
-    elif(FrontCPG < -0.5) : Solenoid = 0
+    # if(CPG1 > 0.5)  : Solenoid = 1
+    # elif(CPG1 < -0.5) : Solenoid = 0
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP1")
     if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP2")
@@ -236,6 +251,119 @@ def sequenceRobotBackward():
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
+def sequenceRobotLeft():
+    global Solenoid
+    global CPG1
+    global CPG2
+    
+    print("FrontCPG = "+str(CPG1) )
+    print("BackCPG = "+str(CPG2) )
+
+    if CPG1 <0.25 and CPG1 > -0.25:
+        FrontMagnetic = 1
+        BackMagnetic = 1
+    elif CPG1 > 0 :
+        FrontMagnetic = 1
+        BackMagnetic = 0 
+    elif CPG1 < 0 :
+        FrontMagnetic = 0
+        BackMagnetic = 1
+   
+    if CPG2 > 0 :
+        CmdChannal(Solenoid1,1)
+        CmdChannal(Solenoid2,0)
+    elif CPG2 <= 0 :
+        CmdChannal(Solenoid1,0)
+        CmdChannal(Solenoid2,0)
+
+    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    # elif(CPG1 > 0)  : FrontMagnetic = 0
+    # elif(CPG1 < 0)  : FrontMagnetic = 1
+    
+    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    # elif(CPG2 > 0)   : BackMagnetic = 0
+    # elif(CPG2 < 0)   : BackMagnetic = 1
+
+    # if(CPG1 > 0.5)  : Solenoid = 1
+    # elif(CPG1 < -0.5) : Solenoid = 0
+
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP1")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP2")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP4")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ Back STEP5")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ Back STEP6")
+
+    if(FrontMagnetic == 1) : 
+        CmdChannal(magneticFL,1)
+        CmdChannal(magneticFR,1)
+    elif(FrontMagnetic == 0) : 
+        CmdChannal(magneticFL,0)
+        CmdChannal(magneticFR,0)
+    if(BackMagnetic == 1) : 
+        CmdChannal(magneticBL,1)
+        CmdChannal(magneticBR,1)
+    elif(BackMagnetic == 0) : 
+        CmdChannal(magneticBL,0)
+        CmdChannal(magneticBR,0)
+
+
+def sequenceRobotRight():
+    global Solenoid
+    global CPG1
+    global CPG2
+    
+    print("FrontCPG = "+str(CPG1) )
+    print("BackCPG = "+str(CPG2) )
+
+    if CPG1 <0.25 and CPG1 > -0.25:
+        FrontMagnetic = 1
+        BackMagnetic = 1
+    elif CPG1 > 0 :
+        FrontMagnetic = 1
+        BackMagnetic = 0 
+    elif CPG1 < 0 :
+        FrontMagnetic = 0
+        BackMagnetic = 1
+   
+    if CPG2 > 0 :
+        CmdChannal(Solenoid1,1)
+        CmdChannal(Solenoid2,0)
+    elif CPG2 <= 0 :
+        CmdChannal(Solenoid1,0)
+        CmdChannal(Solenoid2,0)
+
+    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    # elif(CPG1 > 0)  : FrontMagnetic = 0
+    # elif(CPG1 < 0)  : FrontMagnetic = 1
+    
+    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    # elif(CPG2 > 0)   : BackMagnetic = 0
+    # elif(CPG2 < 0)   : BackMagnetic = 1
+
+    # if(CPG1 > 0.5)  : Solenoid = 1
+    # elif(CPG1 < -0.5) : Solenoid = 0
+
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP1")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP2")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 1): print("------ Back STEP4")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 1): print("------ Back STEP5")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ Back STEP6")
+
+    if(FrontMagnetic == 1) : 
+        CmdChannal(magneticFL,1)
+        CmdChannal(magneticFR,1)
+    elif(FrontMagnetic == 0) : 
+        CmdChannal(magneticFL,0)
+        CmdChannal(magneticFR,0)
+    if(BackMagnetic == 1) : 
+        CmdChannal(magneticBL,1)
+        CmdChannal(magneticBR,1)
+    elif(BackMagnetic == 0) : 
+        CmdChannal(magneticBL,0)
+        CmdChannal(magneticBR,0)
+
 
 def callbackJoy(Dataset):
     global trigger
@@ -255,7 +383,20 @@ def callbackJoy(Dataset):
                 print("command toggle")
                 toggleChannal(button)
 
-     
+        elif(Dataset.data[19] == 6):  #! must be edit
+            button = Dataset.data[19]
+            inputcmd = Dataset.data[button]
+            print(Dataset.data[button])
+            if(inputcmd == -32767): #! must be edit  
+                trigger = True
+                Direction = 3 #Left
+            if(inputcmd == 32767): #! must be edit  
+                trigger = True
+                Direction = 4 #Right
+
+            elif(inputcmd == 0): #! must be edit
+                trigger = False
+                Direction = 0
      
          
         elif(Dataset.data[19] == 7):  #! must be edit
@@ -308,6 +449,8 @@ def listener():
     if(trigger == True):
         if Direction == 1 : sequenceRobotForward()
         elif Direction == 2 : sequenceRobotBackward()
+        elif Direction == 3 : sequenceRobotLeft()
+        elif Direction == 4 : sequenceRobotRight()
     elif(trigger == False):
         #ควรหยุด ปล่อยลม โซลินอยเเละเเม่เหล็ก
 
