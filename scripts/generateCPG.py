@@ -55,9 +55,9 @@ def restartCPG():
     global outputH2
 
     WeightH1_H1 = 1.4
-    WeightH1_H2 = 0.18 + MI
+    WeightH1_H2 = -0.18 + MI
 
-    WeightH2_H1 = -(0.18 + MI) 
+    WeightH2_H1 = (0.18 + MI) 
     activityH1 = 0
     activityH2 = 0
     outputH1 = 0.1
@@ -123,6 +123,19 @@ def listener():
                 trigger = True
             elif inputcmd == 32767: #! must be edit
                 print("receive BW")   
+                trigger = True
+            elif inputcmd == 0: #! must be edit
+                print("no cmd receive")
+                trigger = False
+            
+        elif(Dataset.data[19] == 6):  #! must be edit
+            button = Dataset.data[19]
+            inputcmd = Dataset.data[button]
+            if inputcmd == -32767: #! must be edit
+                print("receive Left")   
+                trigger = True
+            elif inputcmd == 32767: #! must be edit
+                print("receive Right")   
                 trigger = True
             elif inputcmd == 0: #! must be edit
                 print("no cmd receive")
