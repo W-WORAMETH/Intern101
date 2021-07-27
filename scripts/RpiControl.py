@@ -136,13 +136,13 @@ def sequenceRobotForward() :
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
     
-    if CPG1 <= 0.25 and CPG1 >= -0.25:
+    if CPG1 <= 0.3 and CPG1 >= -0.3:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0.25 :
+    elif CPG1 > 0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
-    elif CPG1 < -0.25 :
+    elif CPG1 < -0.3 :
         FrontMagnetic = 0
         BackMagnetic = 1
    
@@ -200,13 +200,13 @@ def sequenceRobotBackward():
     print("BackCPG = "+str(CPG2) )
 
    
-    if CPG1 <= 0.25 and CPG1 >= -0.25:
+    if CPG1 <= 0.3 and CPG1 >= -0.3:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0.25 :
+    elif CPG1 > 0.3:
         FrontMagnetic = 0
         BackMagnetic = 1
-    elif CPG1 < -0.25 :
+    elif CPG1 < -0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
    
@@ -260,13 +260,13 @@ def sequenceRobotLeft():
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
 
-    if CPG1 <= 0.25 and CPG1 >= -0.25:
+    if CPG1 <= 0.3 and CPG1 >= -0.3:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0.25 :
+    elif CPG1 > 0.3 :
         FrontMagnetic = 0
         BackMagnetic = 1
-    elif CPG1 < -0.25 :
+    elif CPG1 < -0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
    
@@ -318,13 +318,13 @@ def sequenceRobotRight():
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
 
-    if CPG1 <= 0.25 and CPG1 >= -0.25:
+    if CPG1 <= 0.3 and CPG1 >= -0.3:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0.25 :
+    elif CPG1 > 0.3:
         FrontMagnetic = 0
         BackMagnetic = 1
-    elif CPG1 < -0.25 :
+    elif CPG1 < -0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
    
