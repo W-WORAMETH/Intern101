@@ -348,12 +348,13 @@ def sequenceRobotRight():
     # if(CPG1 > 0.5)  : Solenoid = 1
     # elif(CPG1 < -0.5) : Solenoid = 0
 
+  
     if(FrontMagnetic == 1 and   BackMagnetic==1 and CPG2<=0): print("------ Right STEP1")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and CPG2<=0): print("------ Right STEP2")
-    if(FrontMagnetic == 0 and   BackMagnetic==1 and CPG2>0):  print("------ Right STEP3")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and CPG2<=0): print("------ Right STEP2")
+    if(FrontMagnetic == 1 and   BackMagnetic==0 and CPG2>0):  print("------ Right STEP3")
     if(FrontMagnetic == 1 and   BackMagnetic==1 and CPG2>0):  print("------ Right STEP4")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and CPG2>0):  print("------ Right STEP5")
-    if(FrontMagnetic == 1 and   BackMagnetic==0 and CPG2<=0): print("------ Right STEP6")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and CPG2>0):  print("------ Right STEP5")
+    if(FrontMagnetic == 0 and   BackMagnetic==1 and CPG2<=0): print("------ Right STEP6")
 
     if(FrontMagnetic == 1) : 
         CmdChannal(magneticFL,1)
