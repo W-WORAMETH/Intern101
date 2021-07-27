@@ -142,7 +142,7 @@ def sequenceRobotForward() :
     elif CPG1 > 0.25 :
         FrontMagnetic = 1
         BackMagnetic = 0
-    elif CPG1 < -0.255 :
+    elif CPG1 < -0.25 :
         FrontMagnetic = 0
         BackMagnetic = 1
    
@@ -199,20 +199,21 @@ def sequenceRobotBackward():
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
 
-    if CPG1 <0.25 and CPG1 > -0.25:
+   
+    if CPG1 <= 0.25 and CPG1 >= -0.25:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0 :
-        FrontMagnetic = 1
-        BackMagnetic = 0 
-    elif CPG1 < 0 :
+    elif CPG1 > 0.25 :
         FrontMagnetic = 0
         BackMagnetic = 1
+    elif CPG1 < -0.25 :
+        FrontMagnetic = 1
+        BackMagnetic = 0
    
     if CPG2 > 0 :
-        Solenoid = 0
-    elif CPG2 <= 0 :
         Solenoid = 1
+    elif CPG2 <= 0 :
+        Solenoid = 0
 
     # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
     # elif(CPG1 > 0)  : FrontMagnetic = 0
@@ -259,15 +260,15 @@ def sequenceRobotLeft():
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
 
-    if CPG1 <0.25 and CPG1 > -0.25:
+    if CPG1 <= 0.25 and CPG1 >= -0.25:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0 :
-        FrontMagnetic = 1
-        BackMagnetic = 0 
-    elif CPG1 < 0 :
+    elif CPG1 > 0.25 :
         FrontMagnetic = 0
         BackMagnetic = 1
+    elif CPG1 < -0.25 :
+        FrontMagnetic = 1
+        BackMagnetic = 0
    
     if CPG2 > 0 :
         CmdChannal(Solenoid1,1)
@@ -317,15 +318,15 @@ def sequenceRobotRight():
     print("FrontCPG = "+str(CPG1) )
     print("BackCPG = "+str(CPG2) )
 
-    if CPG1 <0.25 and CPG1 > -0.25:
+    if CPG1 <= 0.25 and CPG1 >= -0.25:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0 :
-        FrontMagnetic = 1
-        BackMagnetic = 0 
-    elif CPG1 < 0 :
+    elif CPG1 > 0.25 :
         FrontMagnetic = 0
         BackMagnetic = 1
+    elif CPG1 < -0.25 :
+        FrontMagnetic = 1
+        BackMagnetic = 0
    
     if CPG2 > 0 :
         CmdChannal(Solenoid1,0)
