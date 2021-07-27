@@ -271,8 +271,8 @@ def sequenceRobotLeft():
         BackMagnetic = 1
    
     if CPG2 > 0 :
-        CmdChannal(Solenoid1,1)
-        CmdChannal(Solenoid2,0)
+        CmdChannal(Solenoid1,0)
+        CmdChannal(Solenoid2,1)
     elif CPG2 <= 0 :
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
@@ -329,8 +329,8 @@ def sequenceRobotRight():
         BackMagnetic = 1
    
     if CPG2 > 0 :
-        CmdChannal(Solenoid1,0)
-        CmdChannal(Solenoid2,1)
+        CmdChannal(Solenoid1,1)
+        CmdChannal(Solenoid2,0)
     elif CPG2 <= 0 :
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
