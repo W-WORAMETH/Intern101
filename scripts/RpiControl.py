@@ -264,11 +264,11 @@ def sequenceRobotLeft():
         FrontMagnetic = 1
         BackMagnetic = 1
     elif CPG1 > 0.3 :
-        FrontMagnetic = 0
-        BackMagnetic = 1
-    elif CPG1 < -0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
+    elif CPG1 < -0.3 :
+        FrontMagnetic = 0
+        BackMagnetic = 1
    
     if CPG2 > 0 :
         CmdChannal(Solenoid1,1)
@@ -321,12 +321,12 @@ def sequenceRobotRight():
     if CPG1 <= 0.3 and CPG1 >= -0.3:
         FrontMagnetic = 1
         BackMagnetic = 1
-    elif CPG1 > 0.3:
-        FrontMagnetic = 0
-        BackMagnetic = 1
-    elif CPG1 < -0.3 :
+    elif CPG1 > 0.3 :
         FrontMagnetic = 1
         BackMagnetic = 0
+    elif CPG1 < -0.3 :
+        FrontMagnetic = 0
+        BackMagnetic = 1
    
     if CPG2 > 0 :
         CmdChannal(Solenoid1,0)
