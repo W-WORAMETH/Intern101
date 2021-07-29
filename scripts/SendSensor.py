@@ -6,8 +6,8 @@ from intern101.hx711 import HX711
 
 
 rospy.init_node('SendSensor', anonymous=True)
-
-rate = rospy.Rate(1) # 1hz
+#change to 100
+rate = rospy.Rate(100) # 1hz
 Massage = Int32MultiArray()
 Massage.data = []
 
