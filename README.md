@@ -59,14 +59,8 @@ export ROS_HOSTNAME=192.168.1.39
 ````shell
     $ roscore
 ````
+
 #### on Raspberry Pi
-````shell
-    $ rosrun Intern101 SendSensor.py
-````
-````shell
-    $ rosrun Intern101 RpiControl.py
-````
-#### on computer
 *run node SendSensor to read pressure from pressure sensor that connected to raspberry pi shield*
 ````shell
     $ rosrun Intern101 SendSensor.py
@@ -75,8 +69,18 @@ export ROS_HOSTNAME=192.168.1.39
 ````shell
     $ rosrun Intern101 RpiControl.py
 ````
+
 #### on Control Device or Computer
 *run node ReceiveSensor to receive data from raspberry pi*
 ````shell
     $ rosrun Intern101 ReceiveSensor.py
 ````
+*run node generateCPG to generate CPG graph to control robot*
+````shell
+    $ rosrun Intern101 generateCPG.py
+````
+*this node not necessary but you can use it if you want to tast solenoid valve using your keyboard*
+````shell
+    $ rosrun Intern101 SendSolenoid.py
+````
+
