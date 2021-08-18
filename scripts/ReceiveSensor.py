@@ -30,7 +30,7 @@ def callbackSensor(Data):
 
 
 def listener():
-    rospy.init_node('RecieveSensor', anonymous=True)
+    rospy.init_node('ReceiveSensor', anonymous=True)
     rospy.Subscriber('sensor', Int32MultiArray, callbackSensor)    
     rospy.spin()
 
