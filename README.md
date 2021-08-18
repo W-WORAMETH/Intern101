@@ -4,7 +4,7 @@
 ## 2.Clone Package
 #### for raspberry pi
 ````shell
-    $ cd ~/catkin_ws/
+    $ cd ~/catkin_ws/src
 ````
 
 ````shell
@@ -16,7 +16,7 @@
 ````
 #### for control device (where the joystick is connected)
 ````shell
-    $ cd ~/catkin_ws/
+    $ cd ~/catkin_ws/src
 ````
 
 ````shell
@@ -40,6 +40,16 @@
 ````shell
     $ nano ~/.bashrc
 ````
+*add this to .bashrc (edit to your ip address)*
+
+````
+source /opt/ros/noetic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+
+export ROS_MASTER_URI=http://192.168.1.39:11311/ 
+export ROS_HOSTNAME=192.168.1.39
+`````
+
 *source*
 ````shell
     $ source ~/.bashrc
