@@ -31,6 +31,19 @@
     $ catkin_make
 ````
 ## 3.Use package
+#### edit IP for ros connection
+*find ip address*
+````shell
+    $ ifconfig
+````
+*edit ip address*
+````shell
+    $ nano ~/.bashrc
+````
+*source*
+````shell
+    $ source ~/.bashrc
+````
 
 #### roscore where ever you want
 ````shell
