@@ -43,7 +43,7 @@
 ````shell
     $ rosrun Intern101 RpiControl.py
 ````
-#### on Raspberry Pi
+#### on computer
 *run node SendSensor to read pressure from pressure sensor that connected to raspberry pi shield*
 ````shell
     $ rosrun Intern101 SendSensor.py
