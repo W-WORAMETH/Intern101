@@ -205,6 +205,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-catkin_install_python(PROGRAMS scripts/RecieveSensor.py scripts/SendSensor.py scripts/RpiControl.py scripts/SendSolenoid.py scripts/generateCPG.py
+catkin_install_python(PROGRAMS scripts/ReceiveSensor.py scripts/SendSensor.py scripts/RpiControl.py scripts/SendSolenoid.py scripts/generateCPG.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

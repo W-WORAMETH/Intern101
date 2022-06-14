@@ -54,10 +54,13 @@ export ROS_HOSTNAME=192.168.1.39
 ````shell
     $ source ~/.bashrc
 ````
-
+````shell
+    $ source ~/.bashrc
+````
 #### roscore where ever you want
 ````shell
     $ roscore
+    $ source ~/catkin_ws/devel/setup.bash
 ````
 
 #### on Raspberry Pi
