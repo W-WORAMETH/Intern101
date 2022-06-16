@@ -57,38 +57,38 @@ trigger = False
 Direction = 0
 Solenoid = 0
 #pin
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(Channal1, GPIO.OUT)
-# GPIO.setup(Channal2, GPIO.OUT)
-# GPIO.setup(Channal3, GPIO.OUT)
-# GPIO.setup(Channal4, GPIO.OUT)
-# GPIO.setup(Channal5, GPIO.OUT)
-# GPIO.setup(Channal6, GPIO.OUT)
-# GPIO.setup(M1, GPIO.OUT)
-# GPIO.setup(M2, GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(Channal1, GPIO.OUT)
+GPIO.setup(Channal2, GPIO.OUT)
+GPIO.setup(Channal3, GPIO.OUT)
+GPIO.setup(Channal4, GPIO.OUT)
+GPIO.setup(Channal5, GPIO.OUT)
+GPIO.setup(Channal6, GPIO.OUT)
+GPIO.setup(M1, GPIO.OUT)
+GPIO.setup(M2, GPIO.OUT)
 
-# GPIO.output(Channal1,GPIO.HIGH)
-# GPIO.output(Channal2,GPIO.HIGH)
-# GPIO.output(Channal3,GPIO.HIGH)
-# GPIO.output(Channal4,GPIO.HIGH)
-# GPIO.output(Channal5,GPIO.HIGH)
-# GPIO.output(Channal6,GPIO.HIGH)
-# GPIO.output(M1,GPIO.LOW)
-# GPIO.output(M2,GPIO.LOW)
+GPIO.output(Channal1,GPIO.HIGH)
+GPIO.output(Channal2,GPIO.HIGH)
+GPIO.output(Channal3,GPIO.HIGH)
+GPIO.output(Channal4,GPIO.HIGH)
+GPIO.output(Channal5,GPIO.HIGH)
+GPIO.output(Channal6,GPIO.HIGH)
+GPIO.output(M1,GPIO.LOW)
+GPIO.output(M2,GPIO.LOW)
 
 def cleanAndExit():
     print("Cleaning...")
-    #GPIO.cleanup()    
+    GPIO.cleanup()    
     print("Stop Working ...")
     sys.exit()
 
 
-# def triggerCPG(Topic,Massage):
-#     global trigger
-#     pub = rospy.Publisher(Topic,Bool,queue_size=10)
-#     # rospy.loginfo(Massage)
-#     pub.publish(Massage)
-#     if(trigger == True): sequenceRobotForward()
+def triggerCPG(Topic,Massage):
+    global trigger
+    pub = rospy.Publisher(Topic,Bool,queue_size=10)
+    # rospy.loginfo(Massage)
+    pub.publish(Massage)
+    if(trigger == True): sequenceRobotForward()
 
 CPG1 = 0.0
 CPG2 = 0.0
@@ -152,16 +152,16 @@ def sequenceRobotForward() :
         Solenoid = 0
 
 
-    # if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
-    # elif(FrontCPG > 0)  : FrontMagnetic = 1
-    # elif(FrontCPG < 0)  : FrontMagnetic = 0
+    if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
+    elif(FrontCPG > 0)  : FrontMagnetic = 1
+    elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    # if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
-    # elif(BackCPG > 0)   : BackMagnetic = 1
-    # elif(BackCPG < 0)   : BackMagnetic = 0
+    if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
+    elif(BackCPG > 0)   : BackMagnetic = 1
+    elif(BackCPG < 0)   : BackMagnetic = 0
 
-    # if(FrontCPG > 0.7)  : Solenoid = 1
-    # elif(FrontCPG < -0.7) : Solenoid = 0
+    if(FrontCPG > 0.7)  : Solenoid = 1
+    elif(FrontCPG < -0.7) : Solenoid = 0
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ front STEP1")
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ front STEP2")
@@ -215,16 +215,16 @@ def sequenceRobotBackward():
     elif CPG2 <= 0 :
         Solenoid = 0
 
-    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
-    # elif(CPG1 > 0)  : FrontMagnetic = 0
-    # elif(CPG1 < 0)  : FrontMagnetic = 1
+    if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    elif(CPG1 > 0)  : FrontMagnetic = 0
+    elif(CPG1 < 0)  : FrontMagnetic = 1
     
-    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
-    # elif(CPG2 > 0)   : BackMagnetic = 0
-    # elif(CPG2 < 0)   : BackMagnetic = 1
+    if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    elif(CPG2 > 0)   : BackMagnetic = 0
+    elif(CPG2 < 0)   : BackMagnetic = 1
 
-    # if(CPG1 > 0.5)  : Solenoid = 1
-    # elif(CPG1 < -0.5) : Solenoid = 0
+    if(CPG1 > 0.5)  : Solenoid = 1
+    elif(CPG1 < -0.5) : Solenoid = 0
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP1")
     if(FrontMagnetic == 0 and   BackMagnetic==1 and Solenoid == 0): print("------ Back STEP2")
@@ -277,16 +277,16 @@ def sequenceRobotLeft():
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
-    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
-    # elif(CPG1 > 0)  : FrontMagnetic = 0
-    # elif(CPG1 < 0)  : FrontMagnetic = 1
+    if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    elif(CPG1 > 0)  : FrontMagnetic = 0
+    elif(CPG1 < 0)  : FrontMagnetic = 1
     
-    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
-    # elif(CPG2 > 0)   : BackMagnetic = 0
-    # elif(CPG2 < 0)   : BackMagnetic = 1
+    if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    elif(CPG2 > 0)   : BackMagnetic = 0
+    elif(CPG2 < 0)   : BackMagnetic = 1
 
-    # if(CPG1 > 0.5)  : Solenoid = 1
-    # elif(CPG1 < -0.5) : Solenoid = 0
+    if(CPG1 > 0.5)  : Solenoid = 1
+    elif(CPG1 < -0.5) : Solenoid = 0
 
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and CPG2<=0): print("------ left STEP1")
@@ -337,16 +337,16 @@ def sequenceRobotRight():
         CmdChannal(Solenoid1,0)
         CmdChannal(Solenoid2,0)
 
-    # if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
-    # elif(CPG1 > 0)  : FrontMagnetic = 0
-    # elif(CPG1 < 0)  : FrontMagnetic = 1
+    if(CPG1 < 0.25 and CPG1 > -0.25 )   : FrontMagnetic = 1
+    elif(CPG1 > 0)  : FrontMagnetic = 0
+    elif(CPG1 < 0)  : FrontMagnetic = 1
     
-    # if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
-    # elif(CPG2 > 0)   : BackMagnetic = 0
-    # elif(CPG2 < 0)   : BackMagnetic = 1
+    if(CPG2 <0.25 and CPG2 > -0.25 )    : BackMagnetic = 1
+    elif(CPG2 > 0)   : BackMagnetic = 0
+    elif(CPG2 < 0)   : BackMagnetic = 1
 
-    # if(CPG1 > 0.5)  : Solenoid = 1
-    # elif(CPG1 < -0.5) : Solenoid = 0
+    if(CPG1 > 0.5)  : Solenoid = 1
+    elif(CPG1 < -0.5) : Solenoid = 0
 
   
     if(FrontMagnetic == 1 and   BackMagnetic==1 and CPG2<=0): print("------ Right STEP1")
@@ -426,22 +426,22 @@ def callbackJoy(Dataset):
 
 
         
-        # CmdSolenoid(Solenoid1,cmd.data[19])
-        # CmdSolenoid(Solenoid2,cmd.data[1])
-        # CmdSolenoid(Solenoid3,cmd.data[2])
-        # CmdSolenoid(Solenoid4,cmd.data[3])
-        # CmdSolenoid(Solenoid5,cmd.data[4])
-        # CmdSolenoid(Solenoid6,cmd.data[5])
-        # CmdSolenoid(Solenoid6,cmd.data[6])
+        CmdSolenoid(Solenoid1,cmd.data[19])
+        CmdSolenoid(Solenoid2,cmd.data[1])
+        CmdSolenoid(Solenoid3,cmd.data[2])
+        CmdSolenoid(Solenoid4,cmd.data[3])
+        CmdSolenoid(Solenoid5,cmd.data[4])
+        CmdSolenoid(Solenoid6,cmd.data[5])
+        CmdSolenoid(Solenoid6,cmd.data[6])
 
 
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd.data[19]))
-        #rospy.loginfo(Dataset)
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd.data[1]))
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd.data[2]))
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd.data[3]))
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd.data[4]))
-        # rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd.data[19]))
+        rospy.loginfo(Dataset)
+        rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd.data[1]))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd.data[2]))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd.data[3]))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd.data[4]))
+        rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
 
 
     
@@ -474,10 +474,10 @@ if __name__ == '__main__':
   
     
 
-    # GPIO.output(Solenoid1,GPIO.LOW)
-    # GPIO.output(Solenoid2,GPIO.LOW)
-    # GPIO.output(Solenoid3,GPIO.HIGH)
-    # GPIO.output(Solenoid4,GPIO.HIGH)
-    # GPIO.output(Solenoid5,GPIO.LOW)
-    # GPIO.output(Solenoid6,GPIO.HIGH)
+    GPIO.output(Solenoid1,GPIO.LOW)
+    GPIO.output(Solenoid2,GPIO.LOW)
+    GPIO.output(Solenoid3,GPIO.HIGH)
+    GPIO.output(Solenoid4,GPIO.HIGH)
+    GPIO.output(Solenoid5,GPIO.LOW)
+    GPIO.output(Solenoid6,GPIO.HIGH)
 
