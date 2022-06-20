@@ -2,7 +2,7 @@
 #from scripts.RecieveSensor import Data
 import time
 import sys
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Int32MultiArray
 from std_msgs.msg import UInt16MultiArray
@@ -97,10 +97,10 @@ def CmdChannal(Channal,cmd):
     pass
     print("def Cmd")
     if(cmd == 1):
-        # GPIO.output(Channal,GPIO.HIGH)
+        GPIO.output(Channal,GPIO.HIGH)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     elif(cmd == 0):
-        # GPIO.output(Channal,GPIO.LOW)
+        GPIO.output(Channal,GPIO.LOW)
         print("GPIO " + str(Channal) +" = "+ str(cmd) )
     else:
         print("error : command must be 0 or 1")
@@ -152,16 +152,16 @@ def sequenceRobotForward() :
         Solenoid = 0
 
 
-    if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
-    elif(FrontCPG > 0)  : FrontMagnetic = 1
-    elif(FrontCPG < 0)  : FrontMagnetic = 0
+    #if(FrontCPG < 0.2 and FrontCPG > -0.2 )   : FrontMagnetic = 1
+    #elif(FrontCPG > 0)  : FrontMagnetic = 1
+    #elif(FrontCPG < 0)  : FrontMagnetic = 0
     
-    if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
-    elif(BackCPG > 0)   : BackMagnetic = 1
-    elif(BackCPG < 0)   : BackMagnetic = 0
+    #if(BackCPG <0.2 and BackCPG > -0.2 )    : BackMagnetic = 1
+    #elif(BackCPG > 0)   : BackMagnetic = 1
+    #elif(BackCPG < 0)   : BackMagnetic = 0
 
-    if(FrontCPG > 0.7)  : Solenoid = 1
-    elif(FrontCPG < -0.7) : Solenoid = 0
+    #if(FrontCPG > 0.7)  : Solenoid = 1
+    #elif(FrontCPG < -0.7) : Solenoid = 0
 
     if(FrontMagnetic == 1 and   BackMagnetic==1 and Solenoid == 0): print("------ front STEP1")
     if(FrontMagnetic == 1 and   BackMagnetic==0 and Solenoid == 0): print("------ front STEP2")
@@ -388,7 +388,7 @@ def callbackJoy(Dataset):
                 print("command toggle")
                 toggleChannal(button)
 
-        elif(Dataset.data[19] == 6):  #! must be edit
+        elif(Dataset.data[19] == 4):  #! must be edit
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             print(Dataset.data[button])
@@ -404,7 +404,7 @@ def callbackJoy(Dataset):
                 Direction = 0
      
          
-        elif(Dataset.data[19] == 7):  #! must be edit
+        elif(Dataset.data[19] == 5):  #! must be edit
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             print(Dataset.data[button])
@@ -426,22 +426,22 @@ def callbackJoy(Dataset):
 
 
         
-        CmdSolenoid(Solenoid1,cmd.data[19])
-        CmdSolenoid(Solenoid2,cmd.data[1])
-        CmdSolenoid(Solenoid3,cmd.data[2])
-        CmdSolenoid(Solenoid4,cmd.data[3])
-        CmdSolenoid(Solenoid5,cmd.data[4])
-        CmdSolenoid(Solenoid6,cmd.data[5])
-        CmdSolenoid(Solenoid6,cmd.data[6])
+        #CmdSolenoid(Solenoid1,cmd.data[19])
+        #CmdSolenoid(Solenoid2,cmd.data[1])
+        #CmdSolenoid(Solenoid3,cmd.data[2])
+        #CmdSolenoid(Solenoid4,cmd.data[3])
+        #CmdSolenoid(Solenoid5,cmd.data[4])
+        #CmdSolenoid(Solenoid6,cmd.data[5])
+        #CmdSolenoid(Solenoid6,cmd.data[6])
 
 
-        rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd.data[19]))
-        rospy.loginfo(Dataset)
-        rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd.data[1]))
-        rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd.data[2]))
-        rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd.data[3]))
-        rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd.data[4]))
-        rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
+        #rospy.loginfo(rospy.get_caller_id() + "   sensor1 = %s", str(cmd.data[19]))
+        #rospy.loginfo(Dataset)
+        #rospy.loginfo(rospy.get_caller_id() + "   sensor2 = %s", str(cmd.data[1]))
+        #rospy.loginfo(rospy.get_caller_id() + "   sensor3 = %s", str(cmd.data[2]))
+        #rospy.loginfo(rospy.get_caller_id() + "   sensor4 = %s", str(cmd.data[3]))
+        #rospy.loginfo(rospy.get_caller_id() + "   sensor5 = %s", str(cmd.data[4]))
+       # rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
 
 
     
