@@ -116,7 +116,7 @@ def listener():
     
     if (Dataset.data != OldDataset.data):
         
-        if(Dataset.data[19] == 7):  #! must be edit
+        if(Dataset.data[19] == 5):  #! must be edit
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
@@ -129,7 +129,7 @@ def listener():
                 print("no cmd receive")
                 trigger = False
             
-        elif(Dataset.data[19] == 6):  #! must be edit
+        elif(Dataset.data[19] == 4):  #! must be edit
             button = Dataset.data[19]
             inputcmd = Dataset.data[button]
             if inputcmd == -32767: #! must be edit
