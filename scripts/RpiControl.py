@@ -42,10 +42,10 @@ M2 = 22
 
 Solenoid1 = Channal1
 Solenoid2 = Channal2 
-magneticFL = Channal3
-magneticFR = Channal4
-magneticBL = Channal5
-magneticBR = Channal6
+magneticFL = Channal5
+magneticFR = Channal6
+magneticBL = Channal3
+magneticBR = Channal4
 
 
 #!---------------------------
@@ -115,8 +115,8 @@ def toggleChannal(button):
     elif(button ==12):  Sl = Channal1
     elif(button ==13):  Sl = Channal2
 
-    elif(button ==14):  Sl = M1
-    elif(button ==15):  Sl = M2
+    elif(button ==17):  Sl = M1
+    elif(button ==16):  Sl = M2
     CmdChannal(Sl,not(GPIO.input(Sl)))
 
 
@@ -376,8 +376,10 @@ def callbackJoy(Dataset):
 
     if (Dataset.data != OldDataset.data):
         #debouce and do one time when press
+
+
         
-        if(Dataset.data[19]>=8 and Dataset.data[19]<=15):  #digital input
+        if((Dataset.data[19]>=8 and Dataset.data[19]<=17) ):  #digital input
             #print(Dataset)
             button = Dataset.data[19]
             #print(button)
@@ -469,15 +471,21 @@ if __name__ == '__main__':
             listener()
             
     except rospy.ROSInterruptException:
+            CmdChannal(magneticFL,0)
+            CmdChannal(magneticFR,0)
+            CmdChannal(magneticBR,0)
+            CmdChannal(magneticBL,0)
             cleanAndExit()
+            
+
         
   
     
 
-    GPIO.output(Solenoid1,GPIO.LOW)
-    GPIO.output(Solenoid2,GPIO.LOW)
-    GPIO.output(Solenoid3,GPIO.HIGH)
-    GPIO.output(Solenoid4,GPIO.HIGH)
-    GPIO.output(Solenoid5,GPIO.LOW)
-    GPIO.output(Solenoid6,GPIO.HIGH)
+    # GPIO.output(Solenoid1,GPIO.LOW)
+    # GPIO.output(Solenoid2,GPIO.LOW)
+    # GPIO.output(Solenoid3,GPIO.HIGH)
+    # GPIO.output(Solenoid4,GPIO.HIGH)
+    # GPIO.output(Solenoid5,GPIO.LOW)
+    # GPIO.output(Solenoid6,GPIO.HIGH)
 
