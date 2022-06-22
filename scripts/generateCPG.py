@@ -9,6 +9,7 @@ from std_msgs.msg import Int16MultiArray
 from std_msgs.msg import Bool
 #MI = 0.2  #best MI = 0.2
 MI = 0.2
+
 WeightH1_H1 = 1.4
 WeightH1_H2 = -(0.18 + MI)
 WeightH2_H2 = 1.4
@@ -142,24 +143,24 @@ def listener():
                 print("no cmd receive")
                 trigger = False
 
-        if(Dataset.data[19]== 18 ):  #digital input
-            button = Dataset.data[19]
-            state = Dataset.data[button] - OldDataset.data[button]  
-            inputcmd = state   #use state because want rising adge
-            if inputcmd == 1 :  #rising adge occure
-                MI = MI+0.01
-                print("[ Increase MI ] : MI = ", MI)
-                restartCPG()
+        # if(Dataset.data[19]== 18 ):  #digital input
+        #     button = Dataset.data[19]
+        #     state = Dataset.data[button] - OldDataset.data[button]  
+        #     inputcmd = state   #use state because want rising adge
+        #     if inputcmd == 1 :  #rising adge occure
+        #         MI = MI+0.01
+        #         print("[ Increase MI ] : MI = ", MI)
+        #         restartCPG()
         
-        if(Dataset.data[19]== 17 ):  #digital input
+        # if(Dataset.data[19]== 17 ):  #digital input
 
-            button = Dataset.data[19]
-            state = Dataset.data[button] - OldDataset.data[button]  
-            inputcmd = state   #use state because want rising adge
-            if inputcmd == 1 :  #rising adge occure
-                MI = MI-0.01
-                print("[ Decrease MI ] : MI = ", MI)
-                restartCPG()
+        #     button = Dataset.data[19]
+        #     state = Dataset.data[button] - OldDataset.data[button]  
+        #     inputcmd = state   #use state because want rising adge
+        #     if inputcmd == 1 :  #rising adge occure
+        #         MI = MI-0.01
+        #         print("[ Decrease MI ] : MI = ", MI)
+        #         restartCPG()
                
         Dataset.data = OldDataset.data    
     #rospy.spin()
