@@ -28,7 +28,7 @@ Massage = Float64MultiArray()
 Massage.data = []
 
 output = Float64MultiArray()
-output.data = [0,0]
+output.data = [0,0,0]
 trigger = Bool()
 trigger = False
 
@@ -95,7 +95,7 @@ def generateCPG() :
     outputH1 = math.tanh(activityH1)
     outputH2 = math.tanh(activityH2)
 
-    output.data = [outputH1, outputH2]
+    output.data = [outputH1, outputH2,MI]
     rate.sleep()
     
     

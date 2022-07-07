@@ -30,7 +30,7 @@ OldDataset = Int16MultiArray()
 OldDataset.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 state = UInt8()
 CPG = Float64MultiArray()
-CPG =[0,0]
+CPG =[0,0,0]
 
 Channal1 = 4
 Channal2 = 17
@@ -96,6 +96,7 @@ def triggerCPG(Topic,Massage):
 
 CPG1 = 0.0
 CPG2 = 0.0
+MI = 0.0
 
 def CmdChannal(Channal,cmd):
     pass
@@ -127,10 +128,11 @@ def toggleChannal(button):
 def callbackCPG(CPG):
     global CPG1
     global CPG2
+    global MI
 
     CPG1 = float(CPG.data[0])
     CPG2 = float(CPG.data[1])
-
+    MI = float(CPG.data[2])
 
 def sequenceRobotForward() :
     global Solenoid
@@ -450,11 +452,31 @@ def callbackJoy(Dataset):
        # rospy.loginfo(rospy.get_caller_id() + "   sensor6 = %s", str(cmd.data[5]))
 
 
-    
+LogMassage = Float64MultiArray()
+LogMassage.data = []
+
+LogData = Int8MultiArray()
+LogData.data = [0,0,0,0,0,0,0,0,0,0]  # Solenoid1  Solenoid2 FL FR Bl BR  CPG1  CPG2  MI  DIRECTION
+
+def sendData(Topic,LogMassage):
+    pub = rospy.Publisher(Topic,Float64MultiArray,queue_size=10)
+    rospy.loginfo(LogMassage)
+    pub.publish(LogMassage)   
 
 def listener():
     global trigger
     global Direction
+    global Solenoid1
+    global Solenoid2
+    global magneticFL
+    global magneticFR
+    global magneticBL
+    global magneticBR
+    global CPG1
+    global CPG2
+    global MI
+
+
     rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
     rospy.Subscriber('CPG',Float64MultiArray,callbackCPG)
     if(trigger == True):
@@ -467,6 +489,9 @@ def listener():
 
         pass
     rate.sleep()
+
+    LogData.data = [GPIO.input(Solenoid1) , GPIO.input(Solenoid2) , GPIO.input(magneticFL),GPIO.input(magneticFR) ,GPIO.input(magneticBL) ,GPIO.input(magneticBR)) , CPG1 ,CPG2 ,MI]
+
     #rospy.spin()
 
 if __name__ == '__main__':
