@@ -39,8 +39,8 @@ Channal4 = 25
 Channal5 = 24
 Channal6 = 23
 
-M1 = 18
-M2 = 22
+M1 = 22
+M2 = 18
 
 #!-----------Define----------
 
@@ -453,14 +453,14 @@ def callbackJoy(Dataset):
 
 
 LogMassage = Float64MultiArray()
-LogMassage.data = []
+LogMassage.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 
-LogData = Int8MultiArray()
-LogData.data = [0,0,0,0,0,0,0,0,0,0]  # Solenoid1  Solenoid2 FL FR Bl BR  CPG1  CPG2  MI  DIRECTION
+LogData = Float64MultiArray()
+LogData.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]  # Solenoid1  Solenoid2 FL FR Bl BR  CPG1  CPG2  MI  DIRECTION
 
 def sendData(Topic,LogMassage):
     pub = rospy.Publisher(Topic,Float64MultiArray,queue_size=10)
-    rospy.loginfo(LogMassage)
+    #rospy.loginfo(LogMassage)
     pub.publish(LogMassage)   
 
 def listener():
@@ -475,6 +475,8 @@ def listener():
     global CPG1
     global CPG2
     global MI
+    global M1
+    global M2
 
 
     rospy.Subscriber('joyStick',Int16MultiArray, callbackJoy) 
@@ -490,7 +492,7 @@ def listener():
         pass
     rate.sleep()
 
-    LogData.data = [GPIO.input(Solenoid1) , GPIO.input(Solenoid2) , GPIO.input(magneticFL),GPIO.input(magneticFR) ,GPIO.input(magneticBL) ,GPIO.input(magneticBR)) , CPG1 ,CPG2 ,MI]
+    LogData.data = [GPIO.input(Solenoid1) , GPIO.input(Solenoid2) , GPIO.input(magneticFL),GPIO.input(magneticFR) ,GPIO.input(magneticBL) ,GPIO.input(magneticBR) ,GPIO.input(M1),GPIO.input(M2), CPG1 ,CPG2 ,MI ,Direction]
     sendData('LogData',LogData)
     #rospy.spin()
 
