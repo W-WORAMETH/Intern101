@@ -46,27 +46,6 @@ rate = rospy.Rate(10) #5
 
 #test 1
 
-def restartCPG():
-    global MI
-    global WeightH1_H1
-    global WeightH1_H2
-    global WeightH2_H2
-    global WeightH2_H1
-    global activityH1 
-    global activityH2
-    global activityH2
-    global outputH1
-    global outputH2
-
-    WeightH1_H1 = 1.4
-    WeightH1_H2 = -0.18 + MI
-
-    WeightH2_H1 = (0.18 + MI) 
-    activityH1 = 0
-    activityH2 = 0
-    outputH1 = 0.1
-    outputH2 = 0.1
-
 def cleanAndExit():
     print("Cleaning...")    
     print("Stop Working ...")
@@ -88,6 +67,9 @@ def generateCPG() :
     global activityH2
     global outputH1
     global outputH2
+    global output
+
+
 
     activityH1 = WeightH1_H1 * outputH1 + WeightH1_H2 * outputH2 + BiasH1
     activityH2 = WeightH2_H2 * outputH2 + WeightH2_H1 * outputH1 + BiasH2
@@ -117,6 +99,17 @@ def listener():
     global Dataset
     global MI
     
+    global WeightH1_H1
+    global WeightH1_H2
+    global WeightH2_H2
+    global WeightH2_H1
+    global activityH1 
+    global activityH2
+    global activityH2
+    global outputH1
+    global outputH2
+    global output
+
     if (Dataset.data != OldDataset.data):
         
         if(Dataset.data[19] == 5):  #! must be edit
@@ -145,24 +138,48 @@ def listener():
                 print("no cmd receive")
                 trigger = False
 
-        # if(Dataset.data[19]== 18 ):  #digital input
-        #     button = Dataset.data[19]
-        #     state = Dataset.data[button] - OldDataset.data[button]  
-        #     inputcmd = state   #use state because want rising adge
-        #     if inputcmd == 1 :  #rising adge occure
-        #         MI = MI+0.01
-        #         print("[ Increase MI ] : MI = ", MI)
-        #         restartCPG()
-        
-        # if(Dataset.data[19]== 17 ):  #digital input
+        if(Dataset.data[19]== 14 ):  #digital input
+            button = Dataset.data[19]
+            state = Dataset.data[button] - OldDataset.data[button]  
+            inputcmd = state   #use state because want rising adge
+            if inputcmd == 1 :  #rising adge occure
+                MI = MI+0.01
+                print("[ Increase MI ] : MI = ", MI)
+              
 
-        #     button = Dataset.data[19]
-        #     state = Dataset.data[button] - OldDataset.data[button]  
-        #     inputcmd = state   #use state because want rising adge
-        #     if inputcmd == 1 :  #rising adge occure
-        #         MI = MI-0.01
-        #         print("[ Decrease MI ] : MI = ", MI)
-        #         restartCPG()
+                WeightH1_H1 = 1.4
+                WeightH1_H2 = -(0.18 + MI)
+                WeightH2_H2 = 1.4
+                WeightH2_H1 = (0.18 + MI) 
+                activityH1 = 0
+                activityH2 = 0
+                outputH1 = 0.0001
+                outputH2 = 0.0001
+                BiasH1 = 0.0
+                BiasH2 = 0.0
+
+                
+
+        
+        if(Dataset.data[19]== 15 ):  #digital input
+            button = Dataset.data[19]
+            state = Dataset.data[button] - OldDataset.data[button]  
+            inputcmd = state   #use state because want rising adge
+            if inputcmd == 1 :  #rising adge occure
+                MI = MI-0.01
+                print("[ Decrease MI ] : MI = ", MI)
+                
+
+                WeightH1_H1 = 1.4
+                WeightH1_H2 = -(0.18 + MI)
+                WeightH2_H2 = 1.4
+                WeightH2_H1 = (0.18 + MI) 
+                activityH1 = 0
+                activityH2 = 0
+                outputH1 = 0.0001
+                outputH2 = 0.0001
+                BiasH1 = 0.0
+                BiasH2 = 0.0
                
         Dataset.data = OldDataset.data    
     #rospy.spin()
@@ -170,6 +187,7 @@ def listener():
     if(trigger == True):
         generateCPG()  #runnew cpg value
         sendData('CPG',output)
+
     if(trigger == False):
         sendData('CPG',output)
         rate.sleep()
