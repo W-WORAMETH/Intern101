@@ -491,7 +491,7 @@ def listener():
     rate.sleep()
 
     LogData.data = [GPIO.input(Solenoid1) , GPIO.input(Solenoid2) , GPIO.input(magneticFL),GPIO.input(magneticFR) ,GPIO.input(magneticBL) ,GPIO.input(magneticBR)) , CPG1 ,CPG2 ,MI]
-
+    sendData('LogData',LogData)
     #rospy.spin()
 
 if __name__ == '__main__':
