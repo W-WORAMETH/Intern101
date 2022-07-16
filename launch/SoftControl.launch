@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="intern101" type="RpiControl.py" name="RpiControl" output="screen" />
+</launch>

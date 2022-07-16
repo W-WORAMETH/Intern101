@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="intern101" type="SendSolenoid.py" name="SendSolenoid" output="screen" />
+    <node pkg="intern101" type="generateCPG.py" name="generateCPG" output="screen" />
+    <node pkg="joystick_teleop" type="joystick_teleop_node" name="joystick_teleop_node" output="screen" />
+</launch>/home/rpisoft/Videos

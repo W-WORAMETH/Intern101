@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import Int8MultiArray
+from std_msgs.msg import Int16MultiArray
 import sys
+import time
 #from intern101.hx711 import HX711
 
 def cleanAndExit():
@@ -11,18 +12,19 @@ def cleanAndExit():
     sys.exit()
 
 
-rospy.init_node('SendSolenoid', anonymous=True)
+# rospy.init_node('SendSolenoid', anonymous=True)
+rospy.init_node('joyStick', anonymous=True)
 
 rate = rospy.Rate(1) # 1hz
-Massage = Int8MultiArray()
+Massage = Int16MultiArray()
 Massage.data = []
 
-Data = Int8MultiArray()
+Data = Int16MultiArray()
 Data.data = []
 
 
 def sendData(Topic,Massage):
-    pub = rospy.Publisher(Topic,Int8MultiArray,queue_size=10)
+    pub = rospy.Publisher(Topic,Int16MultiArray,queue_size=10)
     rospy.loginfo(Massage)
     pub.publish(Massage)
 
@@ -44,10 +46,40 @@ def ReadKeyboard():
     
     rate.sleep()
 
+
+def createCommand():
+
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+
+
+    Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
+    sendData('joyStick',Data)
+    time.sleep(20)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
+    sendData('joyStick',Data)
+    time.sleep(1)
+
+    
+
+    #inc MI
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+    
+
+
+
 if __name__ == '__main__':
     try:
         while not rospy.is_shutdown():
-            ReadKeyboard()
+            # ReadKeyboard()
+            createCommand()
+
     except rospy.ROSInterruptException:
             cleanAndExit()
         

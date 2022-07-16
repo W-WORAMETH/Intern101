@@ -143,7 +143,7 @@ def listener():
             state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd == 1 :  #rising adge occure
-                MI = MI+0.01
+                MI = MI+0.1
                 print("[ Increase MI ] : MI = ", MI)
               
 
