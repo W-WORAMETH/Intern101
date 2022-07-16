@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 #from scripts.RecieveSensor import Data
-
 #sudo chown root.gpio /dev/gpiomem
-#sudo chmod g+rw /dev/gpiomem
 
 import time
 import sys
@@ -20,7 +18,7 @@ import math
 import numpy as np
 
 
-rospy.init_node('RpiControl', anonymous=True)
+rospy.init_node('RpiControl', anonymous=True , disable_signals=True)
 
 rate = rospy.Rate(10) # 10hz
 
@@ -385,7 +383,7 @@ def callbackJoy(Dataset):
 
 
         
-        if((Dataset.data[19]>=8 and Dataset.data[19]<=17) ):  #digital input
+        if((Dataset.data[19]>=8 and Dataset.data[19]<=13) or (Dataset.data[19]==16) or (Dataset.data[19]==17)):  #digital input
             #print(Dataset)
             button = Dataset.data[19]
             #print(button)
@@ -453,10 +451,10 @@ def callbackJoy(Dataset):
 
 
 LogMassage = Float64MultiArray()
-LogMassage.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+LogMassage.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 
 LogData = Float64MultiArray()
-LogData.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]  # Solenoid1  Solenoid2 FL FR Bl BR  CPG1  CPG2  MI  DIRECTION
+LogData.data = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]  # Solenoid1  Solenoid2 FL FR Bl BR  CPG1  CPG2  MI  DIRECTION
 
 def sendData(Topic,LogMassage):
     pub = rospy.Publisher(Topic,Float64MultiArray,queue_size=10)
@@ -497,16 +495,23 @@ def listener():
     #rospy.spin()
 
 if __name__ == '__main__':
+    
+
     try:
         while not rospy.is_shutdown():
             listener()
+            print("hi")
+           
             
-    except rospy.ROSInterruptException:
-            CmdChannal(magneticFL,0)
-            CmdChannal(magneticFR,0)
-            CmdChannal(magneticBR,0)
-            CmdChannal(magneticBL,0)
-            cleanAndExit()
+    except:
+        print("bye")
+        CmdChannal(4,0)
+        CmdChannal(17,0)
+        CmdChannal(25,0)
+        CmdChannal(24,0)
+        CmdChannal(23,0)
+        CmdChannal(27,0)
+        cleanAndExit()
             
 
         
