@@ -51,7 +51,7 @@ def createCommand():
 
     Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     sendData('joyStick',Data)
-    time.sleep(0.1)
+    time.sleep(3)
 
     Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,16]
     sendData('joyStick',Data)
@@ -88,13 +88,50 @@ def createCommand():
     time.sleep(0.2)
     
 
+    Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
+    sendData('joyStick',Data)
+    time.sleep(30)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
+    sendData('joyStick',Data)
+    time.sleep(2)
+
+    
+
+    #inc MI
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+
+
+    Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
+    sendData('joyStick',Data)
+    time.sleep(30)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
+    sendData('joyStick',Data)
+    time.sleep(2)
+
+    
+
+    #inc MI
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14]
+    sendData('joyStick',Data)
+    time.sleep(0.2)
+
 
 
 if __name__ == '__main__':
     try:
-        while not rospy.is_shutdown():
-            # ReadKeyboard()
-            createCommand()
+
+        createCommand()
+        # while not rospy.is_shutdown():
+        #     # ReadKeyboard()
+        #     createCommand()
 
     except rospy.ROSInterruptException:
             cleanAndExit()
