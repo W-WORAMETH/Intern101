@@ -51,15 +51,31 @@ def createCommand():
 
     Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     sendData('joyStick',Data)
-    time.sleep(0.2)
+    time.sleep(0.1)
 
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,16]
+    sendData('joyStick',Data)
+    time.sleep(0.1)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16]
+    sendData('joyStick',Data)
+    time.sleep(0.1)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,17]
+    sendData('joyStick',Data)
+    time.sleep(0.1)
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7]
+    sendData('joyStick',Data)
+    time.sleep(0.1)
+
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    sendData('joyStick',Data)
+    time.sleep(0.1)
 
     Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
     sendData('joyStick',Data)
-    time.sleep(20)
+    time.sleep(30)
     Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
     sendData('joyStick',Data)
-    time.sleep(1)
+    time.sleep(2)
 
     
 
