@@ -62,7 +62,7 @@ def createCommand():
     Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,17]
     sendData('joyStick',Data)
     time.sleep(0.1)
-    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7]
+    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17]
     sendData('joyStick',Data)
     time.sleep(0.1)
 
@@ -70,12 +70,13 @@ def createCommand():
     sendData('joyStick',Data)
     time.sleep(0.1)
 
+
     Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
     sendData('joyStick',Data)
     time.sleep(30)
-    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
-    sendData('joyStick',Data)
-    time.sleep(2)
+    # Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
+    # sendData('joyStick',Data)
+    # time.sleep(2)
 
     
 
@@ -91,9 +92,9 @@ def createCommand():
     Data.data = [0,0,0,0,0,-32767,0,0,0,0,0,0,0,0,0,0,0,0,0,5] #go front
     sendData('joyStick',Data)
     time.sleep(30)
-    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
-    sendData('joyStick',Data)
-    time.sleep(2)
+    # Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]
+    # sendData('joyStick',Data)
+    # time.sleep(2)
 
     
 
@@ -115,13 +116,13 @@ def createCommand():
 
     
 
-    #inc MI
-    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,14]
-    sendData('joyStick',Data)
-    time.sleep(0.2)
-    Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14]
-    sendData('joyStick',Data)
-    time.sleep(0.2)
+    # #inc MI
+    # Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,14]
+    # sendData('joyStick',Data)
+    # time.sleep(0.2)
+    # Data.data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14]
+    # sendData('joyStick',Data)
+    # time.sleep(0.2)
 
 
 

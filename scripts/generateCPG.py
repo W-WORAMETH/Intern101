@@ -151,12 +151,12 @@ def listener():
                 WeightH1_H2 = -(0.18 + MI)
                 WeightH2_H2 = 1.4
                 WeightH2_H1 = (0.18 + MI) 
-                activityH1 = 0
-                activityH2 = 0
-                outputH1 = 0.0001
-                outputH2 = 0.0001
-                BiasH1 = 0.0
-                BiasH2 = 0.0
+                # activityH1 = 0
+                # activityH2 = 0
+                # outputH1 = 0.0001
+                # outputH2 = 0.0001
+                # BiasH1 = 0.0
+                # BiasH2 = 0.0
 
                 
 
@@ -166,7 +166,7 @@ def listener():
             state = Dataset.data[button] - OldDataset.data[button]  
             inputcmd = state   #use state because want rising adge
             if inputcmd == 1 :  #rising adge occure
-                MI = MI-0.01
+                MI = MI-0.1
                 print("[ Decrease MI ] : MI = ", MI)
                 
 
